@@ -11,6 +11,9 @@
   --accent: #3b82f6;
   --text: #f3f4f6;
   --muted: #9ca3af;
+  --gold: #ffd52b;
+  --silver: #d1d5db;
+  --bronze: #cd7f32;
 }
 * { box-sizing: border-box; }
 body {
@@ -136,6 +139,7 @@ select {
   text-transform: uppercase;
 }
 
+/* History & VIP sections */
 .section-title {
   font-size: 14px;
   font-weight: bold;
@@ -218,6 +222,7 @@ select {
 
 <script>
 (function() {
+  // ألوان النرد بالترتيب: أخضر، أزرق، أصفر، بنفسجي، أحمر، برتقالي، أزرق
   const COLORS_ARR = [
     { name: 'GREEN', hex: '#22c55e' },
     { name: 'BLUE', hex: '#3b82f6' },
@@ -250,10 +255,6 @@ select {
     } catch(e){}
   }
 
-  function getRandomColor() {
-    return COLORS_ARR[Math.floor(Math.random() * COLORS_ARR.length)];
-  }
-
   function renderDice(animate = false) {
     const count = parseInt(document.getElementById('diceCount').value);
     const container = document.getElementById('diceRow');
@@ -263,7 +264,7 @@ select {
     let colorNamesText = [];
 
     for (let i = 0; i < count; i++) {
-      let item = getRandomColor();
+      let item = COLORS_ARR[i % COLORS_ARR.length];
       currentRollColors.push(item);
       colorNamesText.push(item.name);
 
@@ -282,6 +283,7 @@ select {
     const rollColors = renderDice(true);
     playSound();
 
+    // إضافة السجل (آخر 10)
     historyData.unshift(rollColors);
     if (historyData.length > 10) historyData.pop();
     renderHistory();
@@ -319,15 +321,14 @@ select {
   
   document.getElementById('soundBtn').onclick = () => {
     soundEnabled = !soundEnabled;
+    document.getElementById('soundState'] = soundEnabled;
     document.getElementById('soundBtn').textContent = soundEnabled ? '🔊 الصوت: مفعل' : '🔇 الصوت: معطل';
   };
 
+  // التشغيل الأولي
   renderDice(false);
 })();
 </script>
 </body>
 </html>
 
-
-
-      
