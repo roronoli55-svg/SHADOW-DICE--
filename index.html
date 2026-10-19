@@ -1,334 +1,520 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SHADOW DICE — Color Game</title>
+<title>SHADOW DICE — STEAL A BRAINROT</title>
 <style>
 :root {
-  --bg: #0b1120;
-  --panel: #111827;
-  --accent: #3b82f6;
-  --text: #f3f4f6;
-  --muted: #9ca3af;
-  --gold: #ffd52b;
-  --silver: #d1d5db;
-  --bronze: #cd7f32;
+  --bg-dark: #070510;
+  --panel-bg: rgba(18, 12, 38, 0.85);
+  --panel-border: #3b2070;
+  --purple-glow: #8b5cf6;
+  --purple-bright: #a855f7;
+  --text-light: #f3f4f6;
+  --text-muted: #9ca3af;
 }
-* { box-sizing: border-box; }
+
+* { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', system-ui, sans-serif; }
+
 body {
-  margin: 0;
-  color: var(--text);
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: radial-gradient(circle at center, #1e293b 0%, #0b1120 100%);
+  background-color: var(--bg-dark);
+  background-image: 
+    radial-gradient(circle at 50% 20%, #2e1065 0%, transparent 60%),
+    radial-gradient(circle at 10% 80%, #4c1d95 0%, transparent 50%),
+    radial-gradient(circle at 90% 80%, #581c87 0%, transparent 50%);
+  color: var(--text-light);
   min-height: 100vh;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
-  padding: 16px;
-  direction: rtl;
-}
-.shell {
-  width: 100%;
-  max-width: 480px;
-  background: var(--panel);
-  border: 1px solid #1f2937;
-  border-radius: 24px;
-  padding: 24px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.5);
-  text-align: center;
-}
-.dice-icon {
-  font-size: 36px;
-  margin-bottom: 8px;
-}
-h1 {
-  font-size: 24px;
-  letter-spacing: 1.5px;
-  margin: 0 0 4px;
-  font-weight: 800;
-  color: #fff;
-}
-.subtitle {
-  font-size: 11px;
-  color: var(--muted);
-  letter-spacing: 1px;
-  margin-bottom: 20px;
-  text-transform: uppercase;
-}
-.divider {
-  height: 1px;
-  background: #1f2937;
-  margin: 20px 0;
-}
-.controls {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
-  margin-bottom: 20px;
-}
-select {
-  width: 100%;
-  border: 1px solid #374151;
-  border-radius: 12px;
-  background: #1f2937;
-  color: white;
-  padding: 12px;
-  font-size: 13px;
-  outline: none;
-}
-.dice-row {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 24px;
-  min-height: 90px;
-}
-.die {
-  width: 68px;
-  aspect-ratio: 1;
-  border: 4px solid white;
-  border-radius: 18px;
-  display: grid;
-  place-items: center;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-  transition: transform 0.16s;
-}
-.die.roll { animation: roll 0.35s ease; }
-@keyframes roll {
-  0% { transform: scale(1) rotate(0); }
-  50% { transform: scale(0.85) rotate(15deg); }
-  100% { transform: scale(1) rotate(0); }
-}
-.dot {
-  width: 20%;
-  aspect-ratio: 1;
-  background: #fff;
-  border-radius: 50%;
-  box-shadow: 0 0 4px #fff;
-}
-.rollbtn {
-  display: block;
-  width: 100%;
-  border: none;
-  border-radius: 12px;
-  background: linear-gradient(135deg, #3b82f6, #2563eb);
-  color: white;
-  padding: 16px;
-  font-size: 16px;
-  font-weight: bold;
-  box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
-  cursor: pointer;
-  margin-bottom: 16px;
-  transition: filter 0.2s;
-}
-.rollbtn:hover { filter: brightness(1.1); }
-
-.colors-text {
-  font-size: 12px;
-  color: var(--muted);
-  letter-spacing: 0.5px;
-  margin-bottom: 20px;
-  text-transform: uppercase;
-}
-.footer-text {
-  font-size: 10px;
-  color: #6b7280;
-  letter-spacing: 0.5px;
-  text-transform: uppercase;
+  padding: 15px;
 }
 
-/* History & VIP sections */
-.section-title {
-  font-size: 14px;
-  font-weight: bold;
-  color: #60a5fa;
-  margin: 20px 0 10px;
-  text-align: right;
-}
-.history-box {
-  background: #0f172a;
-  border: 1px solid #1e293b;
-  border-radius: 12px;
-  padding: 10px;
-  max-height: 150px;
-  overflow-y: auto;
-  text-align: right;
-  font-size: 12px;
-}
-.history-row {
+/* Header Navbar */
+.navbar {
+  width: 100%;
+  max-width: 1200px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 6px 0;
-  border-bottom: 1px solid #1e293b;
+  padding: 12px 20px;
+  background: var(--panel-bg);
+  border: 1px solid var(--panel-border);
+  border-radius: 16px;
+  margin-bottom: 20px;
+  box-shadow: 0 0 20px rgba(139, 92, 246, 0.15);
 }
-.history-row:last-child { border-bottom: none; }
-.mini-dice { display: flex; gap: 4px; }
-.mini { width: 14px; height: 14px; border: 1px solid #fff; border-radius: 3px; display: inline-block; }
 
-.sound-toggle {
-  margin-top: 15px;
-  background: #1f2937;
-  border: 1px solid #374151;
-  border-radius: 8px;
-  padding: 8px 12px;
+.logo-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo-title {
+  font-size: 22px;
+  font-weight: 900;
+  background: linear-gradient(to bottom, #ffffff, #c084fc);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: 1px;
+}
+
+.nav-links {
+  display: flex;
+  gap: 10px;
+}
+
+.nav-btn {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  color: var(--text-light);
+  padding: 8px 16px;
+  border-radius: 10px;
+  font-size: 13px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.nav-btn.active {
+  background: linear-gradient(135deg, #7c3aed, #9333ea);
+  border-color: var(--purple-bright);
+  box-shadow: 0 0 12px rgba(168, 85, 247, 0.4);
+}
+
+/* Main Layout Grid */
+.main-grid {
+  width: 100%;
+  max-width: 1200px;
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 20px;
+}
+
+@media (max-width: 900px) {
+  .main-grid { grid-template-columns: 1fr; }
+}
+
+.panel {
+  background: var(--panel-bg);
+  border: 1px solid var(--panel-border);
+  border-radius: 20px;
+  padding: 20px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+  backdrop-filter: blur(10px);
+}
+
+/* Section Header */
+.section-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.section-header h2 {
+  font-size: 26px;
+  font-weight: 900;
+  letter-spacing: 1.5px;
+  background: linear-gradient(to right, #e9d5ff, #c084fc, #e9d5ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Controls Row */
+.controls-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-bottom: 25px;
+}
+
+select {
+  background: #130a2a;
+  border: 1px solid var(--panel-border);
   color: #fff;
+  padding: 10px;
+  border-radius: 10px;
+  outline: none;
+  font-size: 13px;
+}
+
+/* Dice Row */
+.dice-container {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 25px;
+  min-height: 85px;
+}
+
+.die {
+  width: 75px;
+  height: 75px;
+  border-radius: 18px;
+  border: 4px solid #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 15px rgba(255,255,255,0.2);
+}
+
+.die.roll-anim {
+  animation: roll 0.35s ease;
+}
+
+@keyframes roll {
+  0% { transform: scale(1) rotate(0deg); }
+  50% { transform: scale(0.8) rotate(20deg); }
+  100% { transform: scale(1) rotate(0deg); }
+}
+
+.dot {
+  width: 16px;
+  height: 16px;
+  background: white;
+  border-radius: 50%;
+  box-shadow: 0 0 6px rgba(255,255,255,0.8);
+}
+
+/* Big Roll Button */
+.roll-btn {
+  width: 100%;
+  padding: 16px;
+  border: none;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #8b5cf6, #6d28d9);
+  color: white;
+  font-size: 20px;
+  font-weight: 900;
+  letter-spacing: 1px;
+  cursor: pointer;
+  box-shadow: 0 0 20px rgba(139, 92, 246, 0.5);
+  transition: transform 0.1s, filter 0.2s;
+  margin-bottom: 20px;
+}
+
+.roll-btn:active { transform: scale(0.98); }
+
+/* Leaderboard Section (Podium) */
+.leaderboard-box {
+  margin-top: 30px;
+  padding-top: 20px;
+  border-top: 1px solid var(--panel-border);
+}
+
+.podium-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 12px;
+  margin-top: 40px;
+  height: 180px;
+}
+
+.podium-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 80px;
+}
+
+.avatar-wrapper {
+  position: relative;
+  margin-bottom: 8px;
+}
+
+.avatar-circle {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: #2e1065;
+  border: 2px solid var(--purple-bright);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  box-shadow: 0 0 10px var(--purple-glow);
+}
+
+.podium-name {
   font-size: 12px;
+  font-weight: bold;
+  margin-bottom: 4px;
+  color: #d8b4fe;
+}
+
+.block-1 { height: 90px; background: linear-gradient(to top, #3b0764, #7e22ce); width: 100%; border-radius: 8px 8px 0 0; border: 1px solid var(--purple-bright); display: flex; align-items: center; justify-content: center; font-size: 24px; font-weight: 900; }
+.block-2 { height: 65px; background: linear-gradient(to top, #2e1065, #6b21a8); width: 100%; border-radius: 8px 8px 0 0; border: 1px solid #9333ea; display: flex; align-items: center; justify-content: center; font-size: 20px; font-weight: 900; }
+.block-3 { height: 45px; background: linear-gradient(to top, #1e1b4b, #581c87); width: 100%; border-radius: 8px 8px 0 0; border: 1px solid #7e22ce; display: flex; align-items: center; justify-content: center; font-size: 18px; font-weight: 900; }
+
+/* Sidebar VIP List */
+.vip-title {
+  font-size: 16px;
+  font-weight: bold;
+  color: #facc15;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 15px;
+}
+
+.vip-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-height: 450px;
+  overflow-y: auto;
+}
+
+.vip-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.08);
+  padding: 10px;
+  border-radius: 12px;
+}
+
+.vip-user {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.vip-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #4c1d95;
+  border: 1px solid var(--purple-bright);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+}
+
+.vip-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.vip-name { font-size: 13px; font-weight: bold; }
+.vip-handle { font-size: 11px; color: var(--text-muted); }
+
+.crown-icon { color: #facc15; font-size: 14px; }
+
+/* Footer Sound Control */
+.bottom-bar {
+  width: 100%;
+  max-width: 1200px;
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.sound-toggle-btn {
+  background: var(--panel-bg);
+  border: 1px solid var(--panel-border);
+  color: #fff;
+  padding: 8px 14px;
+  border-radius: 20px;
   cursor: pointer;
 }
 </style>
 </head>
 <body>
 
-<div class="shell">
-  <div class="dice-icon">🎲</div>
-  <h1>SHADOW DICE</h1>
-  <div class="subtitle">COLOR GAME & LIGHT OR DARK</div>
+<!-- Navbar -->
+<div class="navbar">
+  <div class="logo-group">
+    <span style="font-size: 24px;">👻</span>
+    <div class="logo-title">SHADOW DICE</div>
+  </div>
+  <div class="nav-links">
+    <button class="nav-btn active">🏠 Home</button>
+    <button class="nav-btn">🎲 Dice</button>
+    <button class="nav-btn">👑 VIP</button>
+    <button class="nav-btn">📊 Leaderboard</button>
+  </div>
+</div>
+
+<!-- Main Grid -->
+<div class="main-grid">
   
-  <div class="divider"></div>
+  <!-- Left Main Panel -->
+  <div class="panel">
+    <div class="section-header">
+      <h2>👻 ROLL COLORED DICE 👻</h2>
+    </div>
 
-  <div class="controls">
-    <select id="diceCount">
-      <option value="1">1 DICE</option>
-      <option value="2">2 DICE</option>
-      <option value="3">3 DICE</option>
-      <option value="4" selected>4 DICE</option>
-      <option value="5">5 DICE</option>
-      <option value="6">6 DICE</option>
-    </select>
-    <select id="diceStyle">
-      <option value="colored">COLOR DICE</option>
-    </select>
+    <div class="controls-row">
+      <select id="diceCount">
+        <option value="4" selected>4 Dice</option>
+        <option value="1">1 Dice</option>
+        <option value="2">2 Dice</option>
+        <option value="3">3 Dice</option>
+        <option value="5">5 Dice</option>
+      </select>
+      <select><option>Classic</option></select>
+      <select><option>Colored</option></select>
+    </div>
+
+    <!-- Dice Display -->
+    <div class="dice-container" id="diceContainer"></div>
+
+    <button class="roll-btn" id="rollBtn">🎲 ROLL AGAIN !</button>
+
+    <!-- Leaderboard Podium Section -->
+    <div class="leaderboard-box">
+      <div style="text-align: center; font-weight: bold; color: #a855f7;">🏆 LEADERBOARD 🏆</div>
+      <div class="podium-container">
+        
+        <!-- Rank 2 -->
+        <div class="podium-step">
+          <div class="avatar-wrapper">
+            <div class="avatar-circle">😈</div>
+          </div>
+          <div class="podium-name">Riley</div>
+          <div class="block-2">2</div>
+        </div>
+
+        <!-- Rank 1 (Top VIP) -->
+        <div class="podium-step">
+          <div class="avatar-wrapper">
+            <div class="avatar-circle" style="border-color: #facc15; box-shadow: 0 0 15px #facc15;">👑</div>
+          </div>
+          <div class="podium-name" style="color: #facc15;">Alex (VIP)</div>
+          <div class="block-1">1</div>
+        </div>
+
+        <!-- Rank 3 -->
+        <div class="podium-step">
+          <div class="avatar-wrapper">
+            <div class="avatar-circle">💀</div>
+          </div>
+          <div class="podium-name">Emma</div>
+          <div class="block-3">3</div>
+        </div>
+
+      </div>
+    </div>
   </div>
 
-  <div class="dice-row" id="diceRow"></div>
+  <!-- Right Sidebar (VIP Streamers) -->
+  <div class="panel">
+    <div class="vip-title">
+      👑 VIP / TOP STREAMERS
+    </div>
+    <div class="vip-list">
+      
+      <div class="vip-item">
+        <div class="vip-user">
+          <div class="vip-avatar">👑</div>
+          <div class="vip-details">
+            <span class="vip-name">Alex VIP</span>
+            <span class="vip-handle">@top_streamer1</span>
+          </div>
+        </div>
+        <span class="crown-icon">👑</span>
+      </div>
 
-  <button class="rollbtn" id="rollBtn">ROLL AGAIN!</button>
+      <div class="vip-item">
+        <div class="vip-user">
+          <div class="vip-avatar">👾</div>
+          <div class="vip-details">
+            <span class="vip-name">YourTikTok2</span>
+            <span class="vip-handle">@username2</span>
+          </div>
+        </div>
+        <span class="crown-icon">👑</span>
+      </div>
 
-  <div class="colors-text" id="colorsText">COLORS: --</div>
+      <div class="vip-item">
+        <div class="vip-user">
+          <div class="vip-avatar">🎃</div>
+          <div class="vip-details">
+            <span class="vip-name">YourTikTok3</span>
+            <span class="vip-handle">@username3</span>
+          </div>
+        </div>
+        <span class="crown-icon">👑</span>
+      </div>
 
-  <button class="sound-toggle" id="soundBtn">🔊 الصوت: مفعل</button>
-
-  <div class="section-title">آخر 10 رميات</div>
-  <div class="history-box" id="historyBox">
-    <div style="color: #6b7280; text-align: center;">لم يتم رمي النرد بعد</div>
+    </div>
   </div>
 
-  <div class="divider"></div>
-  <div class="footer-text">SHADOW DICE • FAN-MADE GAME</div>
+</div>
+
+<!-- Bottom Bar -->
+<div class="bottom-bar">
+  <div>SHADOW DICE • A fan-made game</div>
+  <button class="sound-toggle-btn" id="soundBtn">🔊 Sound: ON</button>
 </div>
 
 <script>
 (function() {
-  // ألوان النرد بالترتيب: أخضر، أزرق، أصفر، بنفسجي، أحمر، برتقالي، أزرق
-  const COLORS_ARR = [
-    { name: 'GREEN', hex: '#22c55e' },
+  const COLORS = [
     { name: 'BLUE', hex: '#3b82f6' },
     { name: 'YELLOW', hex: '#eab308' },
-    { name: 'PURPLE', hex: '#a855f7' },
     { name: 'RED', hex: '#ef4444' },
-    { name: 'ORANGE', hex: '#f97316' },
-    { name: 'BLUE', hex: '#3b82f6' }
+    { name: 'GREEN', hex: '#22c55e' },
+    { name: 'PURPLE', hex: '#a855f7' }
   ];
 
-  let historyData = [];
-  let soundEnabled = true;
+  let soundOn = true;
   let audioCtx = null;
 
-  function playSound() {
-    if (!soundEnabled) return;
+  function playRollSound() {
+    if (!soundOn) return;
     try {
       audioCtx = audioCtx || new (window.AudioContext || window.webkitAudioContext)();
       let osc = audioCtx.createOscillator();
       let gain = audioCtx.createGain();
       osc.type = 'sine';
-      osc.frequency.setValueAtTime(450, audioCtx.currentTime);
-      osc.frequency.exponentialRampToValueAtTime(180, audioCtx.currentTime + 0.1);
-      gain.gain.setValueAtTime(0.08, audioCtx.currentTime);
-      gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.12);
+      osc.frequency.setValueAtTime(400, audioCtx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(150, audioCtx.currentTime + 0.1);
+      gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.1);
       osc.connect(gain);
       gain.connect(audioCtx.destination);
       osc.start();
-      osc.stop(audioCtx.currentTime + 0.13);
+      osc.stop(audioCtx.currentTime + 0.1);
     } catch(e){}
   }
 
-  function renderDice(animate = false) {
+  function roll() {
     const count = parseInt(document.getElementById('diceCount').value);
-    const container = document.getElementById('diceRow');
+    const container = document.getElementById('diceContainer');
     container.innerHTML = '';
-    
-    let currentRollColors = [];
-    let colorNamesText = [];
+    playRollSound();
 
     for (let i = 0; i < count; i++) {
-      let item = COLORS_ARR[i % COLORS_ARR.length];
-      currentRollColors.push(item);
-      colorNamesText.push(item.name);
-
+      let color = COLORS[Math.floor(Math.random() * COLORS.length)];
       let die = document.createElement('div');
-      die.className = 'die' + (animate ? ' roll' : '');
-      die.style.background = item.hex;
-      die.innerHTML = '<span class="dot"></span>';
+      die.className = 'die roll-anim';
+      die.style.background = color.hex;
+      die.innerHTML = '<div class="dot"></div>';
       container.appendChild(die);
     }
-
-    document.getElementById('colorsText').textContent = 'COLORS: ' + colorNamesText.join(' • ');
-    return currentRollColors;
   }
 
-  function rollDice() {
-    const rollColors = renderDice(true);
-    playSound();
+  document.getElementById('rollBtn').onclick = roll;
+  document.getElementById('diceCount').onchange = roll;
 
-    // إضافة السجل (آخر 10)
-    historyData.unshift(rollColors);
-    if (historyData.length > 10) historyData.pop();
-    renderHistory();
-  }
-
-  function renderHistory() {
-    const box = document.getElementById('historyBox');
-    box.innerHTML = '';
-    
-    historyData.forEach((roll, idx) => {
-      let row = document.createElement('div');
-      row.className = 'history-row';
-      
-      let numSpan = document.createElement('span');
-      numSpan.textContent = `#${historyData.length - idx}`;
-      numSpan.style.color = '#9ca3af';
-
-      let miniWrap = document.createElement('div');
-      miniWrap.className = 'mini-dice';
-      roll.forEach(c => {
-        let m = document.createElement('span');
-        m.className = 'mini';
-        m.style.background = c.hex;
-        miniWrap.appendChild(m);
-      });
-
-      row.appendChild(numSpan);
-      row.appendChild(miniWrap);
-      box.appendChild(row);
-    });
-  }
-
-  document.getElementById('rollBtn').onclick = rollDice;
-  document.getElementById('diceCount').onchange = () => renderDice(false);
-  
-  document.getElementById('soundBtn').onclick = () => {
-    soundEnabled = !soundEnabled;
-    document.getElementById('soundState'] = soundEnabled;
-    document.getElementById('soundBtn').textContent = soundEnabled ? '🔊 الصوت: مفعل' : '🔇 الصوت: معطل';
+  document.getElementById('soundBtn').onclick = function() {
+    soundOn = !soundOn;
+    this.textContent = soundOn ? '🔊 Sound: ON' : '🔇 Sound: OFF';
   };
 
-  // التشغيل الأولي
-  renderDice(false);
+  roll();
 })();
 </script>
+
 </body>
 </html>
-
