@@ -7,7 +7,7 @@
 <style>
 :root {
   --bg-dark: #070510;
-  --panel-bg: rgba(18, 12, 38, 0.85);
+  --panel-bg: rgba(15, 10, 32, 0.9);
   --panel-border: #3b2070;
   --purple-glow: #8b5cf6;
   --purple-bright: #a855f7;
@@ -20,7 +20,7 @@
 body {
   background-color: var(--bg-dark);
   background-image: 
-    radial-gradient(circle at 50% 20%, #2e1065 0%, transparent 60%),
+    radial-gradient(circle at 50% 15%, #3b0764 0%, transparent 60%),
     radial-gradient(circle at 10% 80%, #4c1d95 0%, transparent 50%),
     radial-gradient(circle at 90% 80%, #581c87 0%, transparent 50%);
   color: var(--text-light);
@@ -34,26 +34,26 @@ body {
 /* Header Navbar */
 .navbar {
   width: 100%;
-  max-width: 1200px;
+  max-width: 1250px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 12px 20px;
+  padding: 12px 24px;
   background: var(--panel-bg);
   border: 1px solid var(--panel-border);
-  border-radius: 16px;
+  border-radius: 18px;
   margin-bottom: 20px;
-  box-shadow: 0 0 20px rgba(139, 92, 246, 0.15);
+  box-shadow: 0 0 25px rgba(139, 92, 246, 0.2);
 }
 
 .logo-group {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
 }
 
 .logo-title {
-  font-size: 22px;
+  font-size: 24px;
   font-weight: 900;
   background: linear-gradient(to bottom, #ffffff, #c084fc);
   -webkit-background-clip: text;
@@ -70,51 +70,57 @@ body {
   background: rgba(255,255,255,0.05);
   border: 1px solid rgba(255,255,255,0.1);
   color: var(--text-light);
-  padding: 8px 16px;
-  border-radius: 10px;
+  padding: 8px 18px;
+  border-radius: 12px;
   font-size: 13px;
+  font-weight: bold;
   cursor: pointer;
   display: flex;
   align-items: center;
   gap: 6px;
+  transition: all 0.2s;
 }
 
 .nav-btn.active {
   background: linear-gradient(135deg, #7c3aed, #9333ea);
   border-color: var(--purple-bright);
-  box-shadow: 0 0 12px rgba(168, 85, 247, 0.4);
+  box-shadow: 0 0 15px rgba(168, 85, 247, 0.5);
 }
 
 /* Main Layout Grid */
 .main-grid {
   width: 100%;
-  max-width: 1200px;
+  max-width: 1250px;
   display: grid;
-  grid-template-columns: 1fr 320px;
+  grid-template-columns: 1fr 330px;
   gap: 20px;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 950px) {
   .main-grid { grid-template-columns: 1fr; }
 }
 
 .panel {
   background: var(--panel-bg);
   border: 1px solid var(--panel-border);
-  border-radius: 20px;
-  padding: 20px;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.5);
-  backdrop-filter: blur(10px);
+  border-radius: 22px;
+  padding: 22px;
+  box-shadow: 0 10px 35px rgba(0,0,0,0.6);
+  backdrop-filter: blur(12px);
 }
 
 /* Section Header */
 .section-header {
   text-align: center;
   margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
 }
 
 .section-header h2 {
-  font-size: 26px;
+  font-size: 28px;
   font-weight: 900;
   letter-spacing: 1.5px;
   background: linear-gradient(to right, #e9d5ff, #c084fc, #e9d5ff);
@@ -126,38 +132,39 @@ body {
 .controls-row {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
+  gap: 12px;
   margin-bottom: 25px;
 }
 
 select {
-  background: #130a2a;
+  background: #110826;
   border: 1px solid var(--panel-border);
   color: #fff;
-  padding: 10px;
-  border-radius: 10px;
+  padding: 12px;
+  border-radius: 12px;
   outline: none;
   font-size: 13px;
+  font-weight: 600;
 }
 
 /* Dice Row */
 .dice-container {
   display: flex;
   justify-content: center;
-  gap: 15px;
+  gap: 16px;
   margin-bottom: 25px;
-  min-height: 85px;
+  min-height: 90px;
 }
 
 .die {
-  width: 75px;
-  height: 75px;
-  border-radius: 18px;
+  width: 80px;
+  height: 80px;
+  border-radius: 20px;
   border: 4px solid #ffffff;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 0 15px rgba(255,255,255,0.2);
+  box-shadow: 0 0 20px rgba(255,255,255,0.25);
 }
 
 .die.roll-anim {
@@ -171,35 +178,90 @@ select {
 }
 
 .dot {
-  width: 16px;
-  height: 16px;
+  width: 18px;
+  height: 18px;
   background: white;
   border-radius: 50%;
-  box-shadow: 0 0 6px rgba(255,255,255,0.8);
+  box-shadow: 0 0 8px rgba(255,255,255,0.9);
 }
 
 /* Big Roll Button */
 .roll-btn {
   width: 100%;
-  padding: 16px;
+  padding: 18px;
   border: none;
-  border-radius: 14px;
+  border-radius: 16px;
   background: linear-gradient(135deg, #8b5cf6, #6d28d9);
   color: white;
-  font-size: 20px;
+  font-size: 22px;
   font-weight: 900;
   letter-spacing: 1px;
   cursor: pointer;
-  box-shadow: 0 0 20px rgba(139, 92, 246, 0.5);
+  box-shadow: 0 0 25px rgba(139, 92, 246, 0.6);
   transition: transform 0.1s, filter 0.2s;
   margin-bottom: 20px;
 }
 
 .roll-btn:active { transform: scale(0.98); }
 
+/* Stats & History Box */
+.stats-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.stat-card {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--panel-border);
+  padding: 12px;
+  border-radius: 14px;
+  font-size: 13px;
+}
+
+.history-title {
+  text-align: center;
+  font-size: 14px;
+  font-weight: 800;
+  color: #c084fc;
+  letter-spacing: 1px;
+  margin-bottom: 12px;
+}
+
+.history-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  background: #0a0518;
+  border: 1px solid var(--panel-border);
+  padding: 12px;
+  border-radius: 14px;
+  max-height: 180px;
+  overflow-y: auto;
+  font-size: 12px;
+}
+
+.history-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.mini-dots {
+  display: flex;
+  gap: 3px;
+}
+
+.mini-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 3px;
+}
+
 /* Leaderboard Section (Podium) */
-.leaderboard-box {
-  margin-top: 30px;
+.leaderboard-section {
+  margin-top: 25px;
   padding-top: 20px;
   border-top: 1px solid var(--panel-border);
 }
@@ -208,64 +270,64 @@ select {
   display: flex;
   justify-content: center;
   align-items: flex-end;
-  gap: 12px;
-  margin-top: 40px;
-  height: 180px;
+  gap: 15px;
+  margin-top: 30px;
+  height: 190px;
 }
 
 .podium-step {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 80px;
-}
-
-.avatar-wrapper {
-  position: relative;
-  margin-bottom: 8px;
+  width: 90px;
 }
 
 .avatar-circle {
-  width: 48px;
-  height: 48px;
+  width: 52px;
+  height: 52px;
   border-radius: 50%;
   background: #2e1065;
   border: 2px solid var(--purple-bright);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 20px;
-  box-shadow: 0 0 10px var(--purple-glow);
+  font-size: 22px;
+  box-shadow: 0 0 12px var(--purple-glow);
+  margin-bottom: 6px;
 }
 
 .podium-name {
-  font-size: 12px;
+  font-size: 13px;
   font-weight: bold;
-  margin-bottom: 4px;
+  margin-bottom: 6px;
   color: #d8b4fe;
 }
 
-.block-1 { height: 90px; background: linear-gradient(to top, #3b0764, #7e22ce); width: 100%; border-radius: 8px 8px 0 0; border: 1px solid var(--purple-bright); display: flex; align-items: center; justify-content: center; font-size: 24px; font-weight: 900; }
-.block-2 { height: 65px; background: linear-gradient(to top, #2e1065, #6b21a8); width: 100%; border-radius: 8px 8px 0 0; border: 1px solid #9333ea; display: flex; align-items: center; justify-content: center; font-size: 20px; font-weight: 900; }
-.block-3 { height: 45px; background: linear-gradient(to top, #1e1b4b, #581c87); width: 100%; border-radius: 8px 8px 0 0; border: 1px solid #7e22ce; display: flex; align-items: center; justify-content: center; font-size: 18px; font-weight: 900; }
+.block-1 { height: 95px; background: linear-gradient(to top, #3b0764, #7e22ce); width: 100%; border-radius: 10px 10px 0 0; border: 1px solid var(--purple-bright); display: flex; align-items: center; justify-content: center; font-size: 26px; font-weight: 900; }
+.block-2 { height: 70px; background: linear-gradient(to top, #2e1065, #6b21a8); width: 100%; border-radius: 10px 10px 0 0; border: 1px solid #9333ea; display: flex; align-items: center; justify-content: center; font-size: 22px; font-weight: 900; }
+.block-3 { height: 50px; background: linear-gradient(to top, #1e1b4b, #581c87); width: 100%; border-radius: 10px 10px 0 0; border: 1px solid #7e22ce; display: flex; align-items: center; justify-content: center; font-size: 18px; font-weight: 900; }
 
 /* Sidebar VIP List */
-.vip-title {
+.vip-header {
   font-size: 16px;
-  font-weight: bold;
+  font-weight: 800;
   color: #facc15;
   display: flex;
   align-items: center;
   gap: 8px;
-  margin-bottom: 15px;
+  margin-bottom: 6px;
+}
+
+.vip-sub {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-bottom: 16px;
 }
 
 .vip-list {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  max-height: 450px;
-  overflow-y: auto;
 }
 
 .vip-item {
@@ -274,26 +336,35 @@ select {
   justify-content: space-between;
   background: rgba(255,255,255,0.03);
   border: 1px solid rgba(255,255,255,0.08);
-  padding: 10px;
-  border-radius: 12px;
+  padding: 10px 12px;
+  border-radius: 14px;
+  text-decoration: none;
+  color: inherit;
+  transition: background 0.2s, transform 0.2s;
+}
+
+.vip-item:hover {
+  background: rgba(168, 85, 247, 0.15);
+  border-color: var(--purple-bright);
+  transform: translateX(-3px);
 }
 
 .vip-user {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
 }
 
 .vip-avatar {
-  width: 36px;
-  height: 36px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   background: #4c1d95;
-  border: 1px solid var(--purple-bright);
+  border: 2px solid var(--purple-bright);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 16px;
+  font-size: 18px;
 }
 
 .vip-details {
@@ -302,14 +373,14 @@ select {
 }
 
 .vip-name { font-size: 13px; font-weight: bold; }
-.vip-handle { font-size: 11px; color: var(--text-muted); }
+.vip-handle { font-size: 11px; color: #a855f7; }
 
-.crown-icon { color: #facc15; font-size: 14px; }
+.crown-icon { color: #facc15; font-size: 16px; }
 
-/* Footer Sound Control */
+/* Bottom Bar */
 .bottom-bar {
   width: 100%;
-  max-width: 1200px;
+  max-width: 1250px;
   margin-top: 20px;
   display: flex;
   justify-content: space-between;
@@ -322,7 +393,7 @@ select {
   background: var(--panel-bg);
   border: 1px solid var(--panel-border);
   color: #fff;
-  padding: 8px 14px;
+  padding: 8px 16px;
   border-radius: 20px;
   cursor: pointer;
 }
@@ -333,7 +404,7 @@ select {
 <!-- Navbar -->
 <div class="navbar">
   <div class="logo-group">
-    <span style="font-size: 24px;">👻</span>
+    <span style="font-size: 26px;">👻</span>
     <div class="logo-title">SHADOW DICE</div>
   </div>
   <div class="nav-links">
@@ -350,7 +421,9 @@ select {
   <!-- Left Main Panel -->
   <div class="panel">
     <div class="section-header">
-      <h2>👻 ROLL COLORED DICE 👻</h2>
+      <span>👻</span>
+      <h2>ROLL COLORED DICE</h2>
+      <span>👻</span>
     </div>
 
     <div class="controls-row">
@@ -370,34 +443,42 @@ select {
 
     <button class="roll-btn" id="rollBtn">🎲 ROLL AGAIN !</button>
 
+    <div class="stats-row">
+      <div class="stat-card">
+        ⏱️ <b>Last Rules</b><br>
+        <span style="color: var(--text-muted); font-size: 11px;">Last 60 minutes</span>
+      </div>
+      <div class="stat-card">
+        🟢 <b>Users Online:</b> <span style="color: #22c55e; font-weight: bold;">184</span>
+      </div>
+    </div>
+
+    <!-- Last 25 Rolls History -->
+    <div class="history-title">— LAST 25 ROLLS —</div>
+    <div class="history-grid" id="historyGrid"></div>
+
     <!-- Leaderboard Podium Section -->
-    <div class="leaderboard-box">
-      <div style="text-align: center; font-weight: bold; color: #a855f7;">🏆 LEADERBOARD 🏆</div>
+    <div class="leaderboard-section">
+      <div style="text-align: center; font-weight: bold; color: #a855f7; font-size: 16px;">🏆 LEADERBOARD PODIUM 🏆</div>
       <div class="podium-container">
         
         <!-- Rank 2 -->
         <div class="podium-step">
-          <div class="avatar-wrapper">
-            <div class="avatar-circle">😈</div>
-          </div>
+          <div class="avatar-circle">😈</div>
           <div class="podium-name">Riley</div>
           <div class="block-2">2</div>
         </div>
 
         <!-- Rank 1 (Top VIP) -->
-        <div class="podium-step">
-          <div class="avatar-wrapper">
-            <div class="avatar-circle" style="border-color: #facc15; box-shadow: 0 0 15px #facc15;">👑</div>
-          </div>
+        <a href="https://www.tiktok.com/@yourname1" target="_blank" class="podium-step" style="text-decoration: none;">
+          <div class="avatar-circle" style="border-color: #facc15; box-shadow: 0 0 15px #facc15;">👑</div>
           <div class="podium-name" style="color: #facc15;">Alex (VIP)</div>
           <div class="block-1">1</div>
-        </div>
+        </a>
 
         <!-- Rank 3 -->
         <div class="podium-step">
-          <div class="avatar-wrapper">
-            <div class="avatar-circle">💀</div>
-          </div>
+          <div class="avatar-circle">💀</div>
           <div class="podium-name">Emma</div>
           <div class="block-3">3</div>
         </div>
@@ -406,45 +487,59 @@ select {
     </div>
   </div>
 
-  <!-- Right Sidebar (VIP Streamers) -->
+  <!-- Right Sidebar (VIP TikTok Streamers) -->
   <div class="panel">
-    <div class="vip-title">
+    <div class="vip-header">
       👑 VIP / TOP STREAMERS
     </div>
+    <div class="vip-sub">Support these creators! (Click to visit TikTok)</div>
+
     <div class="vip-list">
       
-      <div class="vip-item">
+      <!-- حسابات تيك توك VIP قابلة للضغط -->
+      <a href="https://www.tiktok.com/@yourname1" target="_blank" class="vip-item">
         <div class="vip-user">
           <div class="vip-avatar">👑</div>
           <div class="vip-details">
-            <span class="vip-name">Alex VIP</span>
-            <span class="vip-handle">@top_streamer1</span>
+            <span class="vip-name">YourTikTok1</span>
+            <span class="vip-handle">@yourname1</span>
           </div>
         </div>
         <span class="crown-icon">👑</span>
-      </div>
+      </a>
 
-      <div class="vip-item">
+      <a href="https://www.tiktok.com/@yourname2" target="_blank" class="vip-item">
         <div class="vip-user">
           <div class="vip-avatar">👾</div>
           <div class="vip-details">
             <span class="vip-name">YourTikTok2</span>
-            <span class="vip-handle">@username2</span>
+            <span class="vip-handle">@yourname2</span>
           </div>
         </div>
         <span class="crown-icon">👑</span>
-      </div>
+      </a>
 
-      <div class="vip-item">
+      <a href="https://www.tiktok.com/@yourname3" target="_blank" class="vip-item">
         <div class="vip-user">
           <div class="vip-avatar">🎃</div>
           <div class="vip-details">
             <span class="vip-name">YourTikTok3</span>
-            <span class="vip-handle">@username3</span>
+            <span class="vip-handle">@yourname3</span>
           </div>
         </div>
         <span class="crown-icon">👑</span>
-      </div>
+      </a>
+
+      <a href="https://www.tiktok.com/@yourname4" target="_blank" class="vip-item">
+        <div class="vip-user">
+          <div class="vip-avatar">⚡</div>
+          <div class="vip-details">
+            <span class="vip-name">YourTikTok4</span>
+            <span class="vip-handle">@yourname4</span>
+          </div>
+        </div>
+        <span class="crown-icon">👑</span>
+      </a>
 
     </div>
   </div>
@@ -469,6 +564,7 @@ select {
 
   let soundOn = true;
   let audioCtx = null;
+  let historyData = [];
 
   function playRollSound() {
     if (!soundOn) return;
@@ -494,14 +590,50 @@ select {
     container.innerHTML = '';
     playRollSound();
 
+    let currentRoll = [];
+
     for (let i = 0; i < count; i++) {
       let color = COLORS[Math.floor(Math.random() * COLORS.length)];
+      currentRoll.push(color);
+      
       let die = document.createElement('div');
       die.className = 'die roll-anim';
       die.style.background = color.hex;
       die.innerHTML = '<div class="dot"></div>';
       container.appendChild(die);
     }
+
+    historyData.unshift(currentRoll);
+    if (historyData.length > 25) historyData.pop();
+    renderHistory();
+  }
+
+  function renderHistory() {
+    const grid = document.getElementById('historyGrid');
+    grid.innerHTML = '';
+
+    historyData.forEach((roll, idx) => {
+      let item = document.createElement('div');
+      item.className = 'history-item';
+      
+      let num = document.createElement('span');
+      num.style.color = '#9ca3af';
+      num.textContent = (idx + 1) + '.';
+
+      let dots = document.createElement('div');
+      dots.className = 'mini-dots';
+
+      roll.forEach(c => {
+        let d = document.createElement('div');
+        d.className = 'mini-dot';
+        d.style.background = c.hex;
+        dots.appendChild(d);
+      });
+
+      item.appendChild(num);
+      item.appendChild(dots);
+      grid.appendChild(item);
+    });
   }
 
   document.getElementById('rollBtn').onclick = roll;
@@ -517,4 +649,6 @@ select {
 </script>
 
 </body>
-</html>
+  </html>
+
+        
