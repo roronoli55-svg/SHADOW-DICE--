@@ -1,472 +1,248 @@
-
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SHADOW DICE — Steal a Brainrot</title>
+<title>SHADOW DICE — Color Game</title>
 <style>
 :root {
-  --bg: #05040d;
-  --panel: rgba(13, 8, 28, 0.92);
-  --purple: #a927ff;
-  --pink: #ec37ff;
-  --line: #7721b8;
-  --gold: #ffd52b;
-  --silver: #d1d5db;
-  --bronze: #cd7f32;
+  --bg: #0b1120;
+  --panel: #111827;
+  --accent: #3b82f6;
+  --text: #f3f4f6;
+  --muted: #9ca3af;
 }
 * { box-sizing: border-box; }
 body {
   margin: 0;
-  color: #fff;
+  color: var(--text);
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: #05030b;
+  background: radial-gradient(circle at center, #1e293b 0%, #0b1120 100%);
   min-height: 100vh;
-  overflow-x: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 16px;
   direction: rtl;
 }
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: -2;
-  background: radial-gradient(ellipse at 13% 45%, #48108c 0, transparent 35%),
-              radial-gradient(ellipse at 90% 32%, #35066c 0, transparent 32%),
-              radial-gradient(ellipse at 50% 0, #19092e, transparent 50%),
-              linear-gradient(120deg, #07040f, #080311 60%, #030209);
-}
-body::after {
-  content: "👻   ✦   ♛   ✧   👻   ✦   ♛";
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
-  color: #9d23ff;
-  opacity: 0.11;
-  font-size: clamp(30px, 5vw, 72px);
-  letter-spacing: 18px;
-  line-height: 2.3;
-  word-break: break-all;
-  text-shadow: 0 0 22px #b700ff;
-}
-button, select, input { font: inherit; }
-button { cursor: pointer; color: #fff; }
-.shell { max-width: 1500px; margin: auto; padding: 18px 22px 0; }
-
-/* Navigation Topbar */
-.topbar {
-  display: grid;
-  grid-template-columns: 290px 1fr 205px;
-  gap: 16px;
-  align-items: center;
-  margin-bottom: 25px;
-}
-.brand {
-  font-weight: 1000;
-  font-style: italic;
-  line-height: 0.8;
-  letter-spacing: -1px;
-  color: #fff;
-  text-shadow: 3px 3px 0 #7220c7, 0 0 18px #a62bff;
-  font-size: clamp(28px, 3.8vw, 50px);
-}
-.brand small {
-  display: block;
-  font-size: 11px;
-  letter-spacing: 1px;
-  margin-top: 8px;
-  color: #d1b8ff;
-  text-shadow: none;
-}
-.nav {
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  gap: 6px;
-  border: 1px solid #8c24c9;
-  background: #080611;
-  border-radius: 16px;
-  padding: 8px;
-  box-shadow: 0 0 18px #5c0b8c44;
-}
-.nav button, .owner-toggle {
-  border: 1px solid transparent;
-  background: transparent;
-  border-radius: 10px;
-  padding: 10px 14px;
-  white-space: nowrap;
-}
-.nav button.active, .nav button:hover, .owner-toggle:hover {
-  border-color: #a52bff;
-  box-shadow: 0 0 13px #b52bff55;
-  background: #1a092c;
-}
-.ownerbox { position: relative; }
-.owner-toggle {
-  border: 1px solid #8623bc;
+.shell {
   width: 100%;
-  text-align: center;
-  background: #080611;
-}
-.owner-menu {
-  display: none;
-  position: absolute;
-  top: calc(100% + 5px);
-  right: 0;
-  width: 100%;
-  background: #090611;
-  border: 1px solid #7421a7;
-  border-radius: 12px;
-  padding: 7px;
-  z-index: 10;
-  box-shadow: 0 0 20px #6d0da255;
-}
-.owner-menu.open { display: block; }
-.owner-menu button {
-  display: block;
-  width: 100%;
-  text-align: right;
-  background: none;
-  border: 0;
-  border-radius: 8px;
-  padding: 10px;
-}
-.owner-menu button:hover { background: #28103f; }
-
-/* Layout Grid */
-.layout {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) 370px;
-  gap: 16px;
-  align-items: start;
-}
-.panel {
-  border: 1px solid #a329e6;
-  border-radius: 19px;
+  max-width: 480px;
   background: var(--panel);
-  box-shadow: 0 0 20px #730db733, inset 0 0 22px #29083a33;
-}
-.mainpanel { padding: 20px 22px; }
-h1 {
-  font-size: clamp(22px, 2.5vw, 38px);
+  border: 1px solid #1f2937;
+  border-radius: 24px;
+  padding: 24px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.5);
   text-align: center;
-  text-transform: uppercase;
-  font-weight: 900;
-  color: #f5eaff;
-  text-shadow: 0 0 15px #b52cff;
-  margin: 0 0 20px;
 }
-
-/* Controls & Dice Row */
-.controls { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
-select, .field {
+.dice-icon {
+  font-size: 36px;
+  margin-bottom: 8px;
+}
+h1 {
+  font-size: 24px;
+  letter-spacing: 1.5px;
+  margin: 0 0 4px;
+  font-weight: 800;
+  color: #fff;
+}
+.subtitle {
+  font-size: 11px;
+  color: var(--muted);
+  letter-spacing: 1px;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+}
+.divider {
+  height: 1px;
+  background: #1f2937;
+  margin: 20px 0;
+}
+.controls {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+select {
   width: 100%;
-  border: 1px solid #6650a2;
+  border: 1px solid #374151;
   border-radius: 12px;
-  background: #080714;
+  background: #1f2937;
   color: white;
   padding: 12px;
+  font-size: 13px;
+  outline: none;
 }
 .dice-row {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: clamp(10px, 3vw, 24px);
-  flex-wrap: wrap;
-  min-height: 140px;
-  padding: 24px 0;
+  gap: 12px;
+  margin-bottom: 24px;
+  min-height: 90px;
 }
 .die {
-  width: clamp(64px, 8vw, 95px);
+  width: 68px;
   aspect-ratio: 1;
   border: 4px solid white;
-  border-radius: 20px;
+  border-radius: 18px;
   display: grid;
   place-items: center;
-  box-shadow: 0 0 18px currentColor, inset 0 0 8px #fff8;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
   transition: transform 0.16s;
 }
 .die.roll { animation: roll 0.35s ease; }
 @keyframes roll {
-  0% { transform: rotate(0) scale(1); }
-  50% { transform: rotate(20deg) scale(0.85); }
-  100% { transform: rotate(0) scale(1); }
+  0% { transform: scale(1) rotate(0); }
+  50% { transform: scale(0.85) rotate(15deg); }
+  100% { transform: scale(1) rotate(0); }
 }
-.dot { width: 22%; aspect-ratio: 1; background: #fff; border-radius: 50%; box-shadow: 0 0 5px #fff; }
-
+.dot {
+  width: 20%;
+  aspect-ratio: 1;
+  background: #fff;
+  border-radius: 50%;
+  box-shadow: 0 0 4px #fff;
+}
 .rollbtn {
   display: block;
   width: 100%;
-  border: 1px solid #ff8bff;
-  border-radius: 15px;
-  background: linear-gradient(110deg, #8e16e7, #bf21ff 50%, #7812cf);
-  box-shadow: 0 0 18px #a700ff77;
+  border: none;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #3b82f6, #2563eb);
+  color: white;
   padding: 16px;
-  font-size: clamp(20px, 2.5vw, 32px);
-  font-weight: 1000;
-  text-shadow: 2px 2px #501077;
-  margin: 4px 0 18px;
+  font-size: 16px;
+  font-weight: bold;
+  box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
+  cursor: pointer;
+  margin-bottom: 16px;
+  transition: filter 0.2s;
 }
-.rollbtn:hover { filter: brightness(1.15); }
+.rollbtn:hover { filter: brightness(1.1); }
 
-/* Leaderboard Section (Top VIP Podium) */
-.leaderboard-section {
-  margin-top: 25px;
-  padding: 20px;
-  background: rgba(10, 6, 22, 0.85);
-  border: 1px solid #6b1fb0;
-  border-radius: 16px;
+.colors-text {
+  font-size: 12px;
+  color: var(--muted);
+  letter-spacing: 0.5px;
+  margin-bottom: 20px;
+  text-transform: uppercase;
 }
-.podium-container {
-  display: flex;
-  justify-content: center;
-  align-items: flex-end;
-  gap: 16px;
-  margin: 25px 0 20px;
+.footer-text {
+  font-size: 10px;
+  color: #6b7280;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
 }
-.podium-card {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 110px;
-}
-.podium-avatar {
-  width: 64px;
-  height: 64px;
-  border-radius: 50%;
-  background: #17092c;
-  border: 3px solid var(--purple);
-  display: grid;
-  place-items: center;
-  font-size: 28px;
-  box-shadow: 0 0 15px var(--purple);
-  margin-bottom: 8px;
-  position: relative;
-}
-.podium-card.rank-1 .podium-avatar { width: 78px; height: 78px; border-color: var(--gold); box-shadow: 0 0 22px var(--gold); font-size: 36px; }
-.podium-card.rank-2 .podium-avatar { border-color: var(--silver); box-shadow: 0 0 15px var(--silver); }
-.podium-card.rank-3 .podium-avatar { border-color: var(--bronze); box-shadow: 0 0 15px var(--bronze); }
-.podium-name { font-weight: bold; font-size: 13px; text-align: center; color: #eae1ff; margin-bottom: 6px; }
-.podium-block {
-  width: 100%;
-  border-radius: 10px 10px 0 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-weight: 1000;
-  font-size: 24px;
-  background: linear-gradient(180deg, #2a0845, #120320);
-  border: 1px solid #7c24c2;
-  box-shadow: inset 0 0 12px #982bff44;
-}
-.podium-card.rank-1 .podium-block { height: 110px; border-color: var(--gold); color: var(--gold); }
-.podium-card.rank-2 .podium-block { height: 85px; border-color: var(--silver); color: var(--silver); }
-.podium-card.rank-3 .podium-block { height: 65px; border-color: var(--bronze); color: var(--bronze); }
 
-/* History Section */
-.sectiontitle {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  color: #e78aff;
-  font-weight: 900;
-  justify-content: center;
-  margin: 25px 0 12px;
-  text-shadow: 0 0 10px #8c1ac6;
+.section-title {
+  font-size: 14px;
+  font-weight: bold;
+  color: #60a5fa;
+  margin: 20px 0 10px;
+  text-align: right;
 }
-.sectiontitle::before, .sectiontitle::after {
-  content: "";
-  height: 1px;
-  flex: 1;
-  background: linear-gradient(90deg, transparent, #c22aff);
-}
-.history {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 9px;
-  background: #05040d;
-  border: 1px solid #34224f;
+.history-box {
+  background: #0f172a;
+  border: 1px solid #1e293b;
   border-radius: 12px;
-  padding: 12px;
+  padding: 10px;
+  max-height: 150px;
+  overflow-y: auto;
+  text-align: right;
+  font-size: 12px;
 }
-.historyitem { display: flex; align-items: center; gap: 7px; font-size: 13px; }
-.historydice { display: flex; gap: 4px; flex-wrap: wrap; }
-.mini { width: 18px; height: 18px; border: 1px solid white; border-radius: 4px; display: inline-block; }
-
-/* Sidebar VIP List */
-.sidebar { padding: 18px; }
-.sidebar h2 { margin: 0 0 5px; color: #ffe348; font-size: 20px; }
-.sub { color: #d9d0eb; font-size: 12px; margin: 0 0 12px; }
-.viplist { display: flex; flex-direction: column; gap: 8px; }
-.vipitem {
-  display: grid;
-  grid-template-columns: 38px 1fr auto;
-  gap: 10px;
-  align-items: center;
-  border: 1px solid #6550a2;
-  border-radius: 12px;
-  padding: 8px;
-  background: #070611;
-}
-.avatar {
-  width: 38px;
-  height: 38px;
-  border-radius: 50%;
-  display: grid;
-  place-items: center;
-  background: radial-gradient(circle, #7024b9, #10051c);
-  border: 2px solid #a51cff;
-  font-size: 18px;
-}
-.vipname { font-size: 13px; font-weight: bold; }
-.handle { font-size: 11px; color: #bdb1e3; }
-.status-badge { font-size: 10px; padding: 2px 6px; border-radius: 6px; background: #221538; color: #a491d3; border: 1px solid #573a88; }
-
-.addbox { border: 1px dashed #b8a8d8; border-radius: 12px; padding: 14px; margin-top: 14px; display: none; }
-.owner-mode .addbox { display: block; }
-.smallbtn {
-  border: 1px solid #a33bdb;
-  border-radius: 9px;
-  padding: 8px 12px;
-  background: #5e1590;
-  margin-top: 6px;
-}
-.smallbtn.danger { border-color: #a93c53; background: #5c1424; }
-
-/* Footer */
-footer {
+.history-row {
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  gap: 14px;
-  margin: 20px -22px 0;
-  padding: 14px 22px;
-  border-top: 1px solid #8723bf;
-  background: #04030b;
+  align-items: center;
+  padding: 6px 0;
+  border-bottom: 1px solid #1e293b;
 }
-.footerbrand { color: #dc6aff; font-weight: 900; }
-.sound { display: flex; align-items: center; gap: 8px; border: 1px solid #5c3985; border-radius: 24px; padding: 6px 12px; background: #090612; }
+.history-row:last-child { border-bottom: none; }
+.mini-dice { display: flex; gap: 4px; }
+.mini { width: 14px; height: 14px; border: 1px solid #fff; border-radius: 3px; display: inline-block; }
 
-@media(max-width: 1000px) {
-  .topbar { grid-template-columns: 1fr; text-align: center; }
-  .layout { grid-template-columns: 1fr; }
+.sound-toggle {
+  margin-top: 15px;
+  background: #1f2937;
+  border: 1px solid #374151;
+  border-radius: 8px;
+  padding: 8px 12px;
+  color: #fff;
+  font-size: 12px;
+  cursor: pointer;
 }
 </style>
 </head>
 <body>
 
-<div class="shell" id="app">
-  <!-- Top Navigation -->
-  <header class="topbar">
-    <div class="brand">SHADOW<br>DICE 🎲<small>STEAL A BRAINROT</small></div>
-    <nav class="nav">
-      <button class="active" onclick="scrollToSec('dicearea')">⌂ الرئيسية</button>
-      <button onclick="scrollToSec('dicearea')">🎲 النرد</button>
-      <button onclick="scrollToSec('leaderboard')">🏆 المتصدرين</button>
-      <button onclick="scrollToSec('viparea')">♛ VIP</button>
-    </nav>
-    <div class="ownerbox">
-      <button class="owner-toggle" id="ownerToggle">♟ Owner ⌄</button>
-      <div class="owner-menu" id="ownerMenu">
-        <button id="ownerModeBtn">♛ تفعيل وضع Owner</button>
-      </div>
-    </div>
-  </header>
+<div class="shell">
+  <div class="dice-icon">🎲</div>
+  <h1>SHADOW DICE</h1>
+  <div class="subtitle">COLOR GAME & LIGHT OR DARK</div>
+  
+  <div class="divider"></div>
 
-  <div class="layout">
-    <!-- Main Content Panel -->
-    <section class="panel mainpanel" id="dicearea">
-      <h1>👻 &nbsp; ROLL COLORED DICE &nbsp; 👻</h1>
-      
-      <div class="controls">
-        <select id="diceCount">
-          <option value="1">🎲 1 Dice</option>
-          <option value="2">🎲 2 Dice</option>
-          <option value="3">🎲 3 Dice</option>
-          <option value="4" selected>🎲 4 Dice</option>
-          <option value="5">🎲 5 Dice</option>
-          <option value="6">🎲 6 Dice</option>
-        </select>
-        <select id="diceStyle">
-          <option value="classic">🎨 Classic</option>
-        </select>
-        <select id="palette">
-          <option value="colored">🎨 Colored</option>
-        </select>
-      </div>
-
-      <!-- Dice Display Row -->
-      <div class="dice-row" id="diceRow"></div>
-
-      <button class="rollbtn" id="rollBtn">🎲 ROLL AGAIN !</button>
-
-      <!-- Leaderboard / Podium Section -->
-      <div class="leaderboard-section" id="leaderboard">
-        <div class="sectiontitle" style="margin-top:0">🏆 VIP LEADERBOARD</div>
-        <div class="podium-container" id="podium"></div>
-      </div>
-
-      <!-- Roll History Section (Last 10 Rolls) -->
-      <div class="sectiontitle" id="historyarea">LAST 10 ROLLS</div>
-      <div class="history" id="history"></div>
-    </section>
-
-    <!-- Sidebar VIP Section -->
-    <aside class="panel sidebar" id="viparea">
-      <h2>👑 VIP / TOP STREAMERS</h2>
-      <p class="sub">دعم أفضل صناع المحتوى</p>
-
-      <div class="viplist" id="vipList"></div>
-
-      <!-- Owner Panel for Adding TikTok Accounts -->
-      <div class="addbox" id="addBox">
-        <h3 style="margin:0 0 10px; font-size: 14px;">＋ إضافة حساب TikTok</h3>
-        <input class="field" id="vipDisplay" placeholder="اسم العرض (اختياري)" style="margin-bottom:6px;">
-        <input class="field" id="vipHandle" placeholder="يوزر TikTok (بدون @)">
-        <button class="smallbtn" id="addVipBtn">＋ إضافة الحساب</button>
-      </div>
-    </aside>
+  <div class="controls">
+    <select id="diceCount">
+      <option value="1">1 DICE</option>
+      <option value="2">2 DICE</option>
+      <option value="3">3 DICE</option>
+      <option value="4" selected>4 DICE</option>
+      <option value="5">5 DICE</option>
+      <option value="6">6 DICE</option>
+    </select>
+    <select id="diceStyle">
+      <option value="colored">COLOR DICE</option>
+    </select>
   </div>
 
-  <!-- Footer -->
-  <footer>
-    <div><span class="footerbrand">♛ SHADOW DICE</span> — لعبة مجتمعية لـ Steal a Brainrot</div>
-    <div class="sound">
-      <span>🔊</span>
-      <button id="soundBtn" style="background:none; border:0;">الصوت: <b id="soundState">مفعل</b></button>
-    </div>
-  </footer>
+  <div class="dice-row" id="diceRow"></div>
+
+  <button class="rollbtn" id="rollBtn">ROLL AGAIN!</button>
+
+  <div class="colors-text" id="colorsText">COLORS: --</div>
+
+  <button class="sound-toggle" id="soundBtn">🔊 الصوت: مفعل</button>
+
+  <div class="section-title">آخر 10 رميات</div>
+  <div class="history-box" id="historyBox">
+    <div style="color: #6b7280; text-align: center;">لم يتم رمي النرد بعد</div>
+  </div>
+
+  <div class="divider"></div>
+  <div class="footer-text">SHADOW DICE • FAN-MADE GAME</div>
 </div>
 
 <script>
 (function() {
-  // الألوان المطلوبة بالترتيب: أخضر، أزرق، أصفر، بنفسجي، أحمر، برتقالي، أزرق
-  const COLORS = ['#20d84a', '#1685ff', '#ffdf24', '#b72cff', '#ff254f', '#ff8a16', '#1685ff'];
-  let historyData = [];
-  let vipList = [
-    { name: 'YourTikTok1', handle: 'yourname1' },
-    { name: 'YourTikTok2', handle: 'yourname2' },
-    { name: 'YourTikTok3', handle: 'yourname3' },
-    { name: 'YourTikTok4', handle: 'yourname4' },
-    { name: 'YourTikTok5', handle: 'yourname5' }
+  const COLORS_ARR = [
+    { name: 'GREEN', hex: '#22c55e' },
+    { name: 'BLUE', hex: '#3b82f6' },
+    { name: 'YELLOW', hex: '#eab308' },
+    { name: 'PURPLE', hex: '#a855f7' },
+    { name: 'RED', hex: '#ef4444' },
+    { name: 'ORANGE', hex: '#f97316' },
+    { name: 'BLUE', hex: '#3b82f6' }
   ];
-  let isOwner = false;
-  let soundEnabled = true;
 
-  // Audio Context for Roll Sound
+  let historyData = [];
+  let soundEnabled = true;
   let audioCtx = null;
-  function playRollSound() {
+
+  function playSound() {
     if (!soundEnabled) return;
     try {
       audioCtx = audioCtx || new (window.AudioContext || window.webkitAudioContext)();
       let osc = audioCtx.createOscillator();
       let gain = audioCtx.createGain();
       osc.type = 'sine';
-      osc.frequency.setValueAtTime(500, audioCtx.currentTime);
-      osc.frequency.exponentialRampToValueAtTime(200, audioCtx.currentTime + 0.12);
-      gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
-      gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.12);
+      osc.frequency.setValueAtTime(450, audioCtx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(180, audioCtx.currentTime + 0.1);
+      gain.gain.setValueAtTime(0.08, audioCtx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.12);
       osc.connect(gain);
       gain.connect(audioCtx.destination);
       osc.start();
@@ -474,171 +250,84 @@ footer {
     } catch(e){}
   }
 
-  // Render Dice
+  function getRandomColor() {
+    return COLORS_ARR[Math.floor(Math.random() * COLORS_ARR.length)];
+  }
+
   function renderDice(animate = false) {
     const count = parseInt(document.getElementById('diceCount').value);
     const container = document.getElementById('diceRow');
     container.innerHTML = '';
     
-    let rollColors = [];
+    let currentRollColors = [];
+    let colorNamesText = [];
+
     for (let i = 0; i < count; i++) {
-      let color = COLORS[i % COLORS.length];
-      rollColors.push(color);
-      
+      let item = getRandomColor();
+      currentRollColors.push(item);
+      colorNamesText.push(item.name);
+
       let die = document.createElement('div');
       die.className = 'die' + (animate ? ' roll' : '');
-      die.style.background = color;
-      die.style.color = color;
+      die.style.background = item.hex;
       die.innerHTML = '<span class="dot"></span>';
       container.appendChild(die);
     }
-    return rollColors;
+
+    document.getElementById('colorsText').textContent = 'COLORS: ' + colorNamesText.join(' • ');
+    return currentRollColors;
   }
 
-  // Roll Dice Action
-  function roll() {
-    const colors = renderDice(true);
-    playRollSound();
-    
-    // Add to History (Keep only Last 10 rolls)
-    historyData.unshift(colors);
+  function rollDice() {
+    const rollColors = renderDice(true);
+    playSound();
+
+    historyData.unshift(rollColors);
     if (historyData.length > 10) historyData.pop();
     renderHistory();
   }
 
-  // Render History (Last 10)
   function renderHistory() {
-    const container = document.getElementById('history');
-    container.innerHTML = '';
+    const box = document.getElementById('historyBox');
+    box.innerHTML = '';
     
-    if (historyData.length === 0) {
-      container.innerHTML = '<div style="grid-column: span 2; text-align: center; color: #b9b1d7; font-size: 13px;">قم برمي النرد لبدء السجل</div>';
-      return;
-    }
-
-    historyData.forEach((colors, index) => {
-      let item = document.createElement('div');
-      item.className = 'historyitem';
-      
-      let num = document.createElement('span');
-      num.textContent = (index + 1) + '.';
-      num.style.fontWeight = 'bold';
-      num.style.color = '#c22aff';
-      
-      let diceWrap = document.createElement('div');
-      diceWrap.className = 'historydice';
-      colors.forEach(c => {
-        let mini = document.createElement('span');
-        mini.className = 'mini';
-        mini.style.background = c;
-        diceWrap.appendChild(mini);
-      });
-      
-      item.appendChild(num);
-      item.appendChild(diceWrap);
-      container.appendChild(item);
-    });
-  }
-
-  // Render Leaderboard / Podium & VIP Sidebar
-  function renderVIPs() {
-    // 1. Sidebar List
-    const list = document.getElementById('vipList');
-    list.innerHTML = '';
-    vipList.forEach((v, idx) => {
+    historyData.forEach((roll, idx) => {
       let row = document.createElement('div');
-      row.className = 'vipitem';
-      row.innerHTML = `
-        <div class="avatar">👑</div>
-        <div>
-          <div class="vipname">${v.name}</div>
-          <div class="handle">@${v.handle}</div>
-        </div>
-        <div class="status-badge">UNKNOWN</div>
-      `;
+      row.className = 'history-row';
       
-      if (isOwner) {
-        let delBtn = document.createElement('button');
-        delBtn.className = 'smallbtn danger';
-        delBtn.style.margin = '0';
-        delBtn.textContent = '×';
-        delBtn.onclick = () => {
-          vipList.splice(idx, 1);
-          renderVIPs();
-        };
-        row.appendChild(delBtn);
-      }
-      list.appendChild(row);
-    });
+      let numSpan = document.createElement('span');
+      numSpan.textContent = `#${historyData.length - idx}`;
+      numSpan.style.color = '#9ca3af';
 
-    // 2. Podium Display (Top 3 VIPs)
-    const podium = document.getElementById('podium');
-    podium.innerHTML = '';
+      let miniWrap = document.createElement('div');
+      miniWrap.className = 'mini-dice';
+      roll.forEach(c => {
+        let m = document.createElement('span');
+        m.className = 'mini';
+        m.style.background = c.hex;
+        miniWrap.appendChild(m);
+      });
 
-    const top3 = [
-      { vip: vipList[1], rank: 2, num: '2' }, // Left: Rank 2
-      { vip: vipList[0], rank: 1, num: '1' }, // Center: Rank 1
-      { vip: vipList[2], rank: 3, num: '3' }  // Right: Rank 3
-    ];
-
-    top3.forEach(item => {
-      if (!item.vip) return;
-      let card = document.createElement('div');
-      card.className = `podium-card rank-${item.rank}`;
-      card.innerHTML = `
-        <div class="podium-avatar">👑</div>
-        <div class="podium-name">${item.vip.name}</div>
-        <div class="podium-block">${item.num}</div>
-      `;
-      podium.appendChild(card);
+      row.appendChild(numSpan);
+      row.appendChild(miniWrap);
+      box.appendChild(row);
     });
   }
 
-  // Setup Event Listeners
-  document.getElementById('rollBtn').onclick = roll;
+  document.getElementById('rollBtn').onclick = rollDice;
   document.getElementById('diceCount').onchange = () => renderDice(false);
   
-  document.getElementById('ownerToggle').onclick = () => {
-    document.getElementById('ownerMenu').classList.toggle('open');
-  };
-  
-  document.getElementById('ownerModeBtn').onclick = () => {
-    isOwner = !isOwner;
-    document.getElementById('app').classList.toggle('owner-mode', isOwner);
-    document.getElementById('ownerToggle').textContent = isOwner ? '♛ Owner Mode' : '♟ Owner ⌄';
-    document.getElementById('ownerMenu').classList.remove('open');
-    renderVIPs();
-  };
-
-  document.getElementById('addVipBtn').onclick = () => {
-    const handle = document.getElementById('vipHandle').value.trim();
-    const name = document.getElementById('vipDisplay').value.trim();
-    if (!handle) {
-      alert('يرجى إدخال اسم المستخدم على TikTok');
-      return;
-    }
-    vipList.push({ name: name || '@' + handle, handle: handle });
-    document.getElementById('vipHandle').value = '';
-    document.getElementById('vipDisplay').value = '';
-    renderVIPs();
-  };
-
   document.getElementById('soundBtn').onclick = () => {
     soundEnabled = !soundEnabled;
-    document.getElementById('soundState').textContent = soundEnabled ? 'مفعل' : 'معطل';
+    document.getElementById('soundBtn').textContent = soundEnabled ? '🔊 الصوت: مفعل' : '🔇 الصوت: معطل';
   };
 
-  window.scrollToSec = function(id) {
-    document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
-  };
-
-  // Init First Load
   renderDice(false);
-  renderHistory();
-  renderVIPs();
 })();
 </script>
 </body>
 </html>
 
-            
+
+
+      
