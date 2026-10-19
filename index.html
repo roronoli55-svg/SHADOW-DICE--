@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SHADOW DICE — Steal a Brainrot</title>
+<title>MY DICE — Steal a Brainrot</title>
 <style>
 :root {
   --bg-dark: #07040d;
@@ -31,7 +31,7 @@ body {
 
 .shell {
   width: 100%;
-  max-width: 500px; /* متناسق مع شاشات الجوال مثل الفيديو */
+  max-width: 500px;
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -397,7 +397,7 @@ select, input {
   <div class="panel">
     <div class="roll-header">
       <span>👻</span>
-      <h2>ROLL COLORED DICE</h2>
+      <h2>MY DICE</h2>
       <span>👻</span>
     </div>
 
@@ -460,15 +460,15 @@ select, input {
     </div>
   </div>
 
-  <!-- FAQ / Info Section (مأخوذة من مرجع الفيديو) -->
+  <!-- FAQ / Info Section -->
   <div class="info-section">
     <div class="info-card">
-      <h3>HOW DOES OFFLINE DICE WORK?</h3>
-      <p>Offline Dice powers custom digital dice rolls driven by an unbiased randomization engine that gives every color an equal chance of landing. Simply tap the "ROLL AGAIN!" button whenever you're ready to spin.</p>
+      <h3>HOW DOES MY DICE WORK?</h3>
+      <p>My Dice powers custom digital dice rolls driven by an unbiased randomization engine that gives every color an equal chance of landing. Simply tap the "ROLL AGAIN!" button whenever you're ready to spin.</p>
     </div>
     <div class="info-card">
       <h3>ABOUT US</h3>
-      <p>Shadow Dice was created to provide the ultimate digital dice roller packed with custom color dice, smooth interactive features, and 100% fair randomization.</p>
+      <p>My Dice was created to provide the ultimate digital dice roller packed with custom color dice, smooth interactive features, and 100% fair randomization.</p>
     </div>
     <div class="info-card">
       <h3>BECOME A TOP STREAMER</h3>
@@ -478,7 +478,7 @@ select, input {
 
   <!-- Footer -->
   <div class="footer-bar">
-    <div>👑 <b>SHADOW DICE</b> — A fan-made game</div>
+    <div>👑 <b>MY DICE</b> — A custom game</div>
     <button class="sound-btn" id="soundBtn">🔊 Sound: ON</button>
   </div>
 
@@ -486,7 +486,7 @@ select, input {
 
 <script>
 const COLORS = ['#a855f7', '#ef4444', '#3b82f6', '#eab308', '#22c55e'];
-let vips = JSON.parse(localStorage.getItem('vips_data')) || [
+let vips = JSON.parse(localStorage.getItem('mydice_vips')) || [
   {name: 'YourTikTok1', handle: 'yourname1', icon: '👑'},
   {name: 'YourTikTok2', handle: 'yourname2', icon: '👾'},
   {name: 'YourTikTok5', handle: 'yourname5', icon: '🔥'},
@@ -535,7 +535,7 @@ function renderVips() {
       del.onclick = (e) => {
         e.preventDefault();
         vips.splice(index, 1);
-        localStorage.setItem('vips_data', JSON.stringify(vips));
+        localStorage.setItem('mydice_vips', JSON.stringify(vips));
         renderVips();
       };
       a.appendChild(del);
@@ -550,7 +550,7 @@ document.getElementById('addVipBtn').onclick = () => {
   let handle = document.getElementById('inputHandle').value.trim().replace('@','');
   if(!handle) return alert('Enter TikTok handle');
   vips.push({name: name || '@' + handle, handle: handle, icon: '👑'});
-  localStorage.setItem('vips_data', JSON.stringify(vips));
+  localStorage.setItem('mydice_vips', JSON.stringify(vips));
   document.getElementById('inputName').value = '';
   document.getElementById('inputHandle').value = '';
   renderVips();
@@ -595,5 +595,3 @@ roll();
 
 </body>
 </html>
-
-  
