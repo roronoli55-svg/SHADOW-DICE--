@@ -17,37 +17,17 @@
 
 * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', system-ui, sans-serif; }
 
-/* خلفية حية ومماثلة تماماً للموقع الأصلي مع تأثيرات الإضاءة والكتل */
 body {
   background-color: var(--bg-dark);
   background-image: 
     radial-gradient(circle at 15% 20%, rgba(91, 33, 182, 0.45) 0%, transparent 40%),
-    radial-gradient(circle at 85% 75%, rgba(126, 34, 206, 0.35) 0%, transparent 45%),
-    radial-gradient(circle at 50% 50%, rgba(76, 29, 149, 0.2) 0%, transparent 60%);
+    radial-gradient(circle at 85% 75%, rgba(126, 34, 206, 0.35) 0%, transparent 45%);
   color: var(--text-main);
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 16px;
-  position: relative;
-  overflow-x: hidden;
-}
-
-/* إضافة لمسة رموز تعبيرية خافتة في الخلفية لزيادة الحيوية مثل الموقع الأصلي */
-body::before {
-  content: "👻   ✦   🎲   ✧   👻   ✦   🎲   ✧";
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
-  color: #a855f7;
-  opacity: 0.07;
-  font-size: clamp(24px, 4vw, 50px);
-  letter-spacing: 20px;
-  line-height: 3;
-  word-break: break-all;
-  text-shadow: 0 0 15px #a855f7;
 }
 
 .shell {
@@ -56,10 +36,8 @@ body::before {
   display: flex;
   flex-direction: column;
   gap: 16px;
-  z-index: 1;
 }
 
-/* Header Navbar */
 .nav-bar {
   display: flex;
   justify-content: space-between;
@@ -68,7 +46,6 @@ body::before {
   border-radius: 16px;
   padding: 6px;
   gap: 4px;
-  backdrop-filter: blur(10px);
 }
 
 .nav-item {
@@ -92,7 +69,6 @@ body::before {
   box-shadow: 0 0 15px rgba(168, 85, 247, 0.6);
 }
 
-/* Owner Toggle Dropdown */
 .owner-btn-box {
   position: relative;
   width: 140px;
@@ -111,7 +87,6 @@ body::before {
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  backdrop-filter: blur(10px);
 }
 
 .owner-menu {
@@ -144,18 +119,14 @@ body::before {
 
 .owner-menu button:hover, .owner-menu a:hover { background: rgba(168, 85, 247, 0.2); }
 
-/* Panels */
 .panel {
   background: var(--panel-bg);
   border: 1px solid var(--panel-border);
   border-radius: 20px;
   padding: 16px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.7), inset 0 0 20px rgba(139, 92, 246, 0.05);
-  backdrop-filter: blur(12px);
-  position: relative;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.7);
 }
 
-/* Main Dice Header & Status Text */
 .roll-header {
   display: flex;
   flex-direction: column;
@@ -170,7 +141,6 @@ body::before {
   font-weight: 900;
   font-style: italic;
   letter-spacing: 1px;
-  text-shadow: 0 0 12px rgba(168, 85, 247, 0.8);
 }
 
 .roll-status-text {
@@ -180,13 +150,6 @@ body::before {
   font-style: italic;
   min-height: 24px;
   margin-bottom: 6px;
-  text-shadow: 0 0 12px rgba(250, 204, 21, 0.8);
-  animation: pulseText 0.3s infinite alternate;
-}
-
-@keyframes pulseText {
-  0% { transform: scale(1); }
-  100% { transform: scale(1.06); }
 }
 
 .select-controls {
@@ -207,13 +170,14 @@ select, input {
   outline: none;
 }
 
-/* Dice Display */
+/* تنسيق النرد لضمان ظهوره بشكل واضح وثابت */
 .dice-row {
   display: flex;
   justify-content: center;
+  align-items: center;
   gap: 14px;
   margin-bottom: 20px;
-  min-height: 80px;
+  min-height: 90px;
 }
 
 .die-card {
@@ -223,25 +187,17 @@ select, input {
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 0 20px currentColor, inset 0 0 10px rgba(255,255,255,0.6);
-  transition: transform 0.1s;
+  box-shadow: 0 0 20px rgba(168, 85, 247, 0.5);
 }
 
-.die-card.shaking {
-  animation: shakeDice 0.25s infinite ease-in-out;
+.dot { 
+  width: 16px; 
+  height: 16px; 
+  background: #ffffff; 
+  border-radius: 50%; 
+  box-shadow: 0 0 8px #ffffff; 
 }
 
-@keyframes shakeDice {
-  0% { transform: translate(0, 0) rotate(0deg) scale(0.9); }
-  25% { transform: translate(-4px, 4px) rotate(-10deg) scale(0.85); }
-  50% { transform: translate(4px, -4px) rotate(10deg) scale(0.9); }
-  75% { transform: translate(-3px, -2px) rotate(-5deg) scale(0.85); }
-  100% { transform: translate(0, 0) rotate(0deg) scale(0.9); }
-}
-
-.dot { width: 14px; height: 14px; background: #fff; border-radius: 50%; box-shadow: 0 0 8px #fff; }
-
-/* ROLL AGAIN Button */
 .roll-btn {
   width: 100%;
   padding: 14px;
@@ -255,13 +211,8 @@ select, input {
   cursor: pointer;
   box-shadow: 0 0 25px rgba(139, 92, 246, 0.6);
   margin-bottom: 16px;
-  transition: transform 0.1s, filter 0.2s;
 }
 
-.roll-btn:hover { filter: brightness(1.15); }
-.roll-btn:active { transform: scale(0.97); }
-
-/* Stats Row */
 .stats-row {
   display: grid;
   grid-template-columns: 1fr 1fr 90px;
@@ -293,7 +244,6 @@ select, input {
 .per-line { display: flex; justify-content: space-between; align-items: center; }
 .p-dot { width: 8px; height: 8px; border-radius: 2px; }
 
-/* History Grid */
 .history-title {
   text-align: center;
   font-size: 12px;
@@ -317,7 +267,6 @@ select, input {
 .h-dots { display: flex; gap: 2px; }
 .mini-dot { width: 8px; height: 8px; border-radius: 2px; }
 
-/* VIP Section */
 .vip-header {
   font-size: 16px;
   font-weight: 900;
@@ -339,11 +288,9 @@ select, input {
   border-radius: 16px;
   text-decoration: none;
   color: inherit;
-  transition: border-color 0.2s, background 0.2s;
 }
 
 .vip-card:first-child { border-color: #ef4444; }
-.vip-card:hover { border-color: var(--purple-bright); background: rgba(168, 85, 247, 0.08); }
 
 .vip-user { display: flex; align-items: center; gap: 12px; }
 .vip-avatar {
@@ -392,7 +339,6 @@ select, input {
 
 .admin-mode .admin-input-panel { display: block; }
 
-/* Info Section */
 .info-section {
   display: flex;
   flex-direction: column;
@@ -409,7 +355,6 @@ select, input {
 .info-card h3 { font-size: 12px; color: #c084fc; margin-bottom: 6px; text-transform: uppercase; }
 .info-card p { font-size: 11px; color: var(--text-muted); line-height: 1.4; }
 
-/* Footer */
 .footer-bar {
   display: flex;
   justify-content: space-between;
@@ -437,7 +382,6 @@ select, input {
 
 <div class="shell">
   
-  <!-- Navbar Top -->
   <div class="nav-bar">
     <button class="nav-item active">🏠<br>Home</button>
     <button class="nav-item">🎲<br>Dice</button>
@@ -446,7 +390,6 @@ select, input {
     <button class="nav-item">⚙️<br>Settings ▾</button>
   </div>
 
-  <!-- Owner Control Top -->
   <div class="owner-btn-box">
     <button class="owner-btn" id="ownerMenuBtn">👤 Owner <span>▾</span></button>
     <div class="owner-menu" id="ownerMenu">
@@ -455,7 +398,6 @@ select, input {
     </div>
   </div>
 
-  <!-- Main Roll Panel -->
   <div class="panel">
     <div class="roll-header">
       <div class="roll-status-text" id="statusText"></div>
@@ -473,7 +415,6 @@ select, input {
       <select><option>Colored</option></select>
     </div>
 
-    <!-- Dice Row -->
     <div class="dice-row" id="diceContainer"></div>
 
     <button class="roll-btn" id="rollBtn">🎲 ROLL AGAIN !</button>
@@ -495,12 +436,10 @@ select, input {
       </div>
     </div>
 
-    <!-- Last 25 Rolls -->
     <div class="history-title">— LAST 25 ROLLS —</div>
     <div class="history-grid" id="historyGrid"></div>
   </div>
 
-  <!-- VIP Section -->
   <div class="panel">
     <div class="vip-header">OUR TOP STREAMERS</div>
     <div class="vip-sub">Support these creators!</div>
@@ -521,19 +460,13 @@ select, input {
     </div>
   </div>
 
-  <!-- FAQ / Info Section -->
   <div class="info-section">
     <div class="info-card">
       <h3>HOW DOES MY DICE WORK?</h3>
-      <p>My Dice powers custom digital dice rolls driven by an unbiased randomization engine that gives every color an equal chance of landing. Simply tap the "ROLL AGAIN!" button whenever you're ready to spin.</p>
-    </div>
-    <div class="info-card">
-      <h3>ABOUT US</h3>
-      <p>My Dice was created to provide the ultimate digital dice roller packed with custom color dice, smooth interactive features, and 100% fair randomization.</p>
+      <p>My Dice powers custom digital dice rolls driven by an unbiased randomization engine that gives every color an equal chance of landing.</p>
     </div>
   </div>
 
-  <!-- Footer -->
   <div class="footer-bar">
     <div>👑 <b>MY DICE</b> — A custom game</div>
     <button class="sound-btn" id="soundBtn">🔊 Sound: ON</button>
@@ -543,45 +476,30 @@ select, input {
 
 <script>
 const COLORS = ['#a855f7', '#ef4444', '#3b82f6', '#eab308', '#22c55e'];
-let vips = JSON.parse(localStorage.getItem('mydice_vips_v3')) || [
+let vips = JSON.parse(localStorage.getItem('mydice_vips_v4')) || [
   {name: 'Blinder', handle: 'BlinderFps', img: 'https://images.unsplash.com/photo-1566492031773-4f4e44671857?w=100'},
   {name: 'RICHARSNRY', handle: 'richardsnry_', img: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=100'},
-  {name: 'DRAVENOX', handle: 'no1x.zzin0', img: 'https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?w=100'},
-  {name: 'LIAM KING', handle: 'liamking_4000', img: 'https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=100'},
-  {name: 'DARKSON', handle: 'dark_____son', img: 'https://images.unsplash.com/photo-1527980965255-d3b416303d12?w=100'}
+  {name: 'DRAVENOX', handle: 'no1x.zzin0', img: 'https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?w=100'}
 ];
 
 let historyData = [];
 let isAdmin = false;
 let soundEnabled = true;
 
-function playDiceSound(type) {
+function playSound() {
   if (!soundEnabled) return;
   try {
     const ctx = new (window.AudioContext || window.webkitAudioContext)();
     const osc = ctx.createOscillator();
     const gain = ctx.createGain();
-    
     osc.connect(gain);
     gain.connect(ctx.destination);
-    
-    if (type === 'roll') {
-      osc.type = 'triangle';
-      osc.frequency.setValueAtTime(150, ctx.currentTime);
-      osc.frequency.exponentialRampToValueAtTime(400, ctx.currentTime + 0.2);
-      gain.gain.setValueAtTime(0.15, ctx.currentTime);
-      gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.25);
-      osc.start();
-      osc.stop(ctx.currentTime + 0.25);
-    } else if (type === 'success') {
-      osc.type = 'sine';
-      osc.frequency.setValueAtTime(440, ctx.currentTime);
-      osc.frequency.exponentialRampToValueAtTime(880, ctx.currentTime + 0.3);
-      gain.gain.setValueAtTime(0.2, ctx.currentTime);
-      gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.35);
-      osc.start();
-      osc.stop(ctx.currentTime + 0.35);
-    }
+    osc.frequency.setValueAtTime(200, ctx.currentTime);
+    osc.frequency.exponentialRampToValueAtTime(500, ctx.currentTime + 0.15);
+    gain.gain.setValueAtTime(0.15, ctx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.2);
+    osc.start();
+    osc.stop(ctx.currentTime + 0.2);
   } catch(e) {}
 }
 
@@ -598,7 +516,6 @@ document.getElementById('ownerMenuBtn').onclick = () => {
 document.getElementById('toggleAdminBtn').onclick = () => {
   isAdmin = !isAdmin;
   document.getElementById('appBody').classList.toggle('admin-mode', isAdmin);
-  alert(isAdmin ? 'Admin Mode Activated!' : 'Admin Mode Deactivated');
   renderVips();
   document.getElementById('ownerMenu').style.display = 'none';
 };
@@ -614,7 +531,7 @@ function renderVips() {
     a.innerHTML = `
       <div class="vip-user">
         <div class="vip-avatar">
-          <img src="${v.img || 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=100'}" alt="${v.name}">
+          <img src="${v.img}" alt="${v.name}">
         </div>
         <div class="vip-details">
           <div class="vip-name-row">
@@ -634,12 +551,11 @@ function renderVips() {
       del.onclick = (e) => {
         e.preventDefault();
         vips.splice(index, 1);
-        localStorage.setItem('mydice_vips_v3', JSON.stringify(vips));
+        localStorage.setItem('mydice_vips_v4', JSON.stringify(vips));
         renderVips();
       };
       a.appendChild(del);
     }
-
     container.appendChild(a);
   });
 }
@@ -649,8 +565,8 @@ document.getElementById('addVipBtn').onclick = () => {
   let handle = document.getElementById('inputHandle').value.trim().replace('@','');
   let img = document.getElementById('inputImg').value.trim();
   if(!handle) return alert('Enter TikTok handle');
-  vips.push({name: name || '@' + handle, handle: handle, img: img});
-  localStorage.setItem('mydice_vips_v3', JSON.stringify(vips));
+  vips.push({name: name || '@' + handle, handle: handle, img: img || 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=100'});
+  localStorage.setItem('mydice_vips_v4', JSON.stringify(vips));
   document.getElementById('inputName').value = '';
   document.getElementById('inputHandle').value = '';
   document.getElementById('inputImg').value = '';
@@ -665,20 +581,18 @@ function roll() {
   
   rollBtn.disabled = true;
   container.innerHTML = '';
-
-  playDiceSound('roll');
+  playSound();
   statusText.textContent = "LET'S SEE...";
 
   for(let i=0; i<count; i++) {
     let d = document.createElement('div');
-    d.className = 'die-card shaking';
+    d.className = 'die-card';
     d.style.background = COLORS[Math.floor(Math.random() * COLORS.length)];
     d.innerHTML = '<div class="dot"></div>';
     container.appendChild(d);
   }
 
   setTimeout(() => {
-    playDiceSound('success');
     statusText.textContent = "AMAZING!";
     container.innerHTML = '';
 
@@ -687,7 +601,7 @@ function roll() {
       let c = COLORS[Math.floor(Math.random() * COLORS.length)];
       current.push(c);
       let d = document.createElement('div');
-      d.className = 'die-card anim';
+      d.className = 'die-card';
       d.style.background = c;
       d.innerHTML = '<div class="dot"></div>';
       container.appendChild(d);
@@ -700,13 +614,27 @@ function roll() {
     setTimeout(() => {
       statusText.textContent = "";
       rollBtn.disabled = false;
-    }, 1000);
+    }, 800);
 
-  }, 600);
+  }, 500);
 }
 
 function renderHistory() {
   const grid = document.getElementById('historyGrid');
   grid.innerHTML = '';
-  hi
+  historyData.forEach((roll, i) => {
+    let row = document.createElement('div');
+    row.className = 'h-item';
+    row.innerHTML = `${i+1}. <div class="h-dots">` + roll.map(c => `<div class="mini-dot" style="background:${c}"></div>`).join('') + `</div>`;
+    grid.appendChild(row);
+  });
+}
 
+document.getElementById('rollBtn').onclick = roll;
+renderVips();
+roll();
+</script>
+
+</body>
+  </html>
+  
