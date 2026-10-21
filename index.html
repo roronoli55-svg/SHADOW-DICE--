@@ -1,610 +1,642 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MY DICE - Official Streamer & Dice Simulator</title>
-  
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Poppins:wght@400;600;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>APEX DICE</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Luckiest+Guy&family=Nunito:wght@700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0d0f17;
+            --card-bg: #161926;
+            --accent-yellow: #ffcc00;
+            --accent-red: #ff3366;
+            --accent-green: #00e676;
+            --accent-blue: #00b0ff;
+            --accent-purple: #9d4edd;
+            --text-white: #ffffff;
+            --text-dim: #8c9bbf;
+            --border-radius: 20px;
+        }
 
-  <style>
-    :root {
-      --bg-dark: #07030f;
-      --card-bg: rgba(18, 10, 32, 0.92);
-      --card-border: rgba(147, 51, 234, 0.35);
-      --primary-purple: #9333ea;
-      --accent-yellow: #facc15;
-      --glow-purple: rgba(147, 51, 234, 0.5);
-      --glow-yellow: rgba(250, 204, 21, 0.6);
-      --text-main: #ffffff;
-      --text-muted: #a1a1aa;
-      --font-family: 'Fredoka', 'Poppins', sans-serif;
-    }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            user-select: none;
+            font-family: 'Fredoka One', cursive, sans-serif;
+        }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; user-select: none; }
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-white);
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            padding: 20px 10px;
+        }
 
-    body {
-      background-color: var(--bg-dark);
-      background-image: 
-        radial-gradient(circle at 50% 0%, rgba(147, 51, 234, 0.18) 0%, transparent 70%),
-        radial-gradient(circle at 100% 100%, rgba(250, 204, 21, 0.06) 0%, transparent 50%);
-      color: var(--text-main);
-      font-family: var(--font-family);
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 10px 10px 80px 10px;
-      overflow-x: hidden;
-    }
+        .app-container {
+            width: 100%;
+            max-width: 480px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
 
-    /* Top Broadcast Alert Banner */
-    #broadcastBanner {
-      position: fixed;
-      top: -100px;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 9999;
-      background: linear-gradient(135deg, #facc15, #eab308);
-      color: #000;
-      padding: 12px 24px;
-      border-radius: 50px;
-      font-weight: 800;
-      font-size: 1.1rem;
-      box-shadow: 0 0 30px rgba(250, 204, 21, 0.8);
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      transition: top 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    }
-    #broadcastBanner.active { top: 15px; }
+        /* Top Header */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 5px;
+        }
 
-    /* Header Navbar */
-    .top-bar {
-      width: 100%;
-      max-width: 1100px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 12px 10px;
-    }
+        .brand-title {
+            font-family: 'Luckiest Guy', cursive;
+            font-size: 26px;
+            letter-spacing: 1.5px;
+            color: var(--text-white);
+            text-shadow: 2px 2px 0px #000;
+        }
 
-    .brand-logo {
-      font-size: 1.8rem;
-      font-weight: 900;
-      letter-spacing: 1px;
-      color: #fff;
-      text-shadow: 0 0 15px var(--glow-purple);
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .brand-logo i { color: var(--accent-yellow); filter: drop-shadow(0 0 8px var(--glow-yellow)); }
+        .btn-owner-panel {
+            background: linear-gradient(180deg, #ff3366 0%, #d80032 100%);
+            border: 2px solid #ff7597;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 12px;
+            font-size: 14px;
+            cursor: pointer;
+            box-shadow: 0 4px 0 #80001d;
+            transition: transform 0.1s;
+        }
 
-    .header-actions { display: flex; gap: 8px; align-items: center; }
+        .btn-owner-panel:active {
+            transform: translateY(3px);
+            box-shadow: 0 1px 0 #80001d;
+        }
 
-    .btn-admin {
-      background: rgba(250, 204, 21, 0.15);
-      border: 2px solid var(--accent-yellow);
-      color: var(--accent-yellow);
-      padding: 6px 12px;
-      border-radius: 10px;
-      font-weight: 700;
-      font-size: 0.8rem;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
+        /* Controls Section */
+        .selectors-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 8px;
+        }
 
-    /* Main App Layout Grid: Left Sidebar + Center Content */
-    .app-layout {
-      width: 100%;
-      max-width: 1100px;
-      display: grid;
-      grid-template-columns: 280px 1fr;
-      gap: 16px;
-      align-items: start;
-    }
+        .custom-select {
+            background-color: #202538;
+            border: 2px solid #323954;
+            color: white;
+            padding: 10px 8px;
+            border-radius: 14px;
+            font-size: 14px;
+            text-align: center;
+            outline: none;
+            cursor: pointer;
+        }
 
-    @media (max-width: 850px) {
-      .app-layout {
-        grid-template-columns: 1fr;
-      }
-    }
+        /* Dice Display Grid */
+        .dice-area {
+            background-color: var(--card-bg);
+            border-radius: var(--border-radius);
+            padding: 25px 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 12px;
+            min-height: 120px;
+            border: 2px solid #202538;
+            box-shadow: inset 0 0 15px rgba(0,0,0,0.5);
+        }
 
-    /* Left Sidebar: VIP Streamers */
-    .sidebar-card {
-      background: var(--card-bg);
-      border: 2px solid var(--card-border);
-      border-radius: 20px;
-      padding: 16px;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      backdrop-filter: blur(10px);
-    }
+        .dice {
+            width: 70px;
+            height: 70px;
+            border-radius: 18px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 32px;
+            box-shadow: 0 6px 0 rgba(0,0,0,0.4);
+            border: 3px solid rgba(255,255,255,0.2);
+            transition: transform 0.15s, background-color 0.2s;
+        }
 
-    .sidebar-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
+        .dice.rolling {
+            animation: rollAnim 0.3s infinite linear;
+        }
 
-    .sidebar-title {
-      font-size: 0.85rem;
-      font-weight: 800;
-      color: var(--accent-yellow);
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
+        @keyframes rollAnim {
+            0% { transform: rotate(0deg) scale(0.95); }
+            50% { transform: rotate(180deg) scale(1.05); }
+            100% { transform: rotate(360deg) scale(0.95); }
+        }
 
-    .btn-blur {
-      background: rgba(255, 255, 255, 0.1);
-      border: none;
-      color: #fff;
-      padding: 4px 8px;
-      border-radius: 6px;
-      font-size: 0.7rem;
-      cursor: pointer;
-      font-weight: 700;
-    }
+        /* Dice Colors */
+        .bg-purple { background-color: var(--accent-purple); }
+        .bg-yellow { background-color: var(--accent-yellow); color: #000; }
+        .bg-red { background-color: var(--accent-red); }
+        .bg-blue { background-color: var(--accent-blue); }
+        .bg-orange { background-color: #ff9100; }
+        .bg-green { background-color: var(--accent-green); color: #000; }
 
-    .streamer-list {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      max-height: 420px;
-      overflow-y: auto;
-    }
+        /* Game ID and Verification */
+        .session-info {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+        }
 
-    .streamer-item {
-      background: rgba(0, 0, 0, 0.3);
-      border: 1px solid rgba(255, 255, 255, 0.05);
-      padding: 8px 10px;
-      border-radius: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      cursor: pointer;
-      transition: all 0.2s ease;
-    }
-    .streamer-item:hover { border-color: var(--primary-purple); background: rgba(147, 51, 234, 0.15); }
+        .game-id {
+            font-size: 18px;
+            letter-spacing: 1px;
+            color: #fff;
+        }
 
-    .streamer-info { display: flex; align-items: center; gap: 8px; }
-    .avatar {
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      background: var(--primary-purple);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 800;
-      font-size: 0.85rem;
-    }
-    .handle { display: flex; flex-direction: column; }
-    .handle-name { font-size: 0.75rem; font-weight: 700; }
-    .handle-sub { font-size: 0.65rem; color: var(--text-muted); }
-    .badge-verified { color: #facc15; font-size: 0.7rem; }
+        .game-id span {
+            color: var(--accent-yellow);
+        }
 
-    /* Center Main Board */
-    .main-card {
-      background: var(--card-bg);
-      border: 2px solid var(--card-border);
-      border-radius: 20px;
-      padding: 20px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-      backdrop-filter: blur(10px);
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
+        .btn-verify {
+            background-color: #202538;
+            border: 2px solid #343d5c;
+            color: #4da6ff;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            cursor: pointer;
+        }
 
-    .controls-row { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
-    .control-group { display: flex; flex-direction: column; gap: 4px; }
-    .control-label { font-size: 0.7rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; }
+        /* Action Button */
+        .btn-roll {
+            background: linear-gradient(180deg, #ffd000 0%, #ff9100 100%);
+            border: none;
+            color: #000;
+            font-family: 'Luckiest Guy', cursive;
+            font-size: 30px;
+            padding: 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            box-shadow: 0 8px 0 #b36b00;
+            letter-spacing: 1px;
+            transition: transform 0.05s, box-shadow 0.05s;
+            width: 100%;
+        }
 
-    .custom-select {
-      background: rgba(0, 0, 0, 0.4);
-      border: 1px solid var(--card-border);
-      color: #fff;
-      padding: 8px 12px;
-      border-radius: 10px;
-      font-family: inherit;
-      font-weight: 700;
-      font-size: 0.85rem;
-      outline: none;
-      cursor: pointer;
-    }
+        .btn-roll:active {
+            transform: translateY(6px);
+            box-shadow: 0 2px 0 #b36b00;
+        }
 
-    /* Dice Board Stage */
-    .dice-stage {
-      background: rgba(0, 0, 0, 0.4);
-      border: 1px solid rgba(255, 255, 255, 0.05);
-      border-radius: 16px;
-      min-height: 160px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 14px;
-      padding: 20px;
-    }
+        .btn-roll:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
 
-    /* Pure Colored Dice with single center glow dot */
-    .colored-dice {
-      width: 70px;
-      height: 70px;
-      border-radius: 16px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: inset 0 -5px 0 rgba(0, 0, 0, 0.3), 0 6px 20px rgba(0, 0, 0, 0.5);
-      position: relative;
-    }
-    .center-dot {
-      width: 16px;
-      height: 16px;
-      background: #ffffff;
-      border-radius: 50%;
-      box-shadow: 0 0 12px rgba(255, 255, 255, 1), 0 0 25px rgba(255, 255, 255, 0.8);
-    }
+        /* Score & Stats Board */
+        .board-card {
+            background-color: var(--card-bg);
+            border-radius: var(--border-radius);
+            padding: 15px;
+            border: 2px solid #202538;
+        }
 
-    .c-purple { background: #a855f7; box-shadow: inset 0 -5px 0 rgba(0,0,0,0.3), 0 0 18px rgba(168,85,247,0.5); }
-    .c-green  { background: #22c55e; box-shadow: inset 0 -5px 0 rgba(0,0,0,0.3), 0 0 18px rgba(34,197,94,0.5); }
-    .c-red    { background: #ef4444; box-shadow: inset 0 -5px 0 rgba(0,0,0,0.3), 0 0 18px rgba(239,68,68,0.5); }
-    .c-yellow { background: #facc15; box-shadow: inset 0 -5px 0 rgba(0,0,0,0.3), 0 0 18px rgba(250,204,21,0.5); }
-    .c-blue   { background: #3b82f6; box-shadow: inset 0 -5px 0 rgba(0,0,0,0.3), 0 0 18px rgba(59,130,246,0.5); }
-    .c-orange { background: #f97316; box-shadow: inset 0 -5px 0 rgba(0,0,0,0.3), 0 0 18px rgba(249,115,22,0.5); }
+        .score-adjuster {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #10121a;
+            padding: 10px 15px;
+            border-radius: 14px;
+            margin-bottom: 12px;
+        }
 
-    .dice-shake { animation: shake 0.4s ease infinite; }
-    @keyframes shake {
-      0% { transform: translate(0,0) rotate(0deg); }
-      20% { transform: translate(-3px, 2px) rotate(-6deg); }
-      40% { transform: translate(3px, -2px) rotate(6deg); }
-      60% { transform: translate(-2px, -2px) rotate(-4deg); }
-      80% { transform: translate(2px, 2px) rotate(4deg); }
-      100% { transform: translate(0,0) rotate(0deg); }
-    }
+        .score-btn {
+            background-color: #252b3e;
+            border: 1px solid #3a4361;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
 
-    /* Session Info Bar */
-    .session-bar {
-      background: rgba(0, 0, 0, 0.4);
-      padding: 8px 14px;
-      border-radius: 10px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 0.75rem;
-      border: 1px solid rgba(255, 255, 255, 0.05);
-    }
-    .session-bar span { color: var(--text-muted); font-weight: 600; }
-    .session-id { color: var(--primary-purple); font-weight: 800; }
-    .verify-link { color: var(--accent-yellow); text-decoration: none; font-weight: 700; cursor: pointer; }
+        .score-value {
+            font-size: 36px;
+            font-weight: bold;
+        }
 
-    /* Roll Button */
-    .btn-roll {
-      background: linear-gradient(180deg, #facc15 0%, #eab308 100%);
-      color: #000;
-      border: none;
-      padding: 14px;
-      border-radius: 14px;
-      font-size: 1.2rem;
-      font-weight: 900;
-      cursor: pointer;
-      box-shadow: 0 5px 0 #ca8a04, 0 8px 20px var(--glow-yellow);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-    }
-    .btn-roll:active { transform: translateY(3px); box-shadow: 0 2px 0 #ca8a04, 0 4px 10px var(--glow-yellow); }
+        .stats-bar {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+        }
 
-    /* History Log (Colors Only) */
-    .history-card {
-      background: rgba(0, 0, 0, 0.35);
-      border: 1px solid rgba(255, 255, 255, 0.05);
-      border-radius: 14px;
-      padding: 14px;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-    .history-header {
-      display: flex;
-      justify-content: space-between;
-      font-size: 0.75rem;
-      font-weight: 800;
-      color: var(--text-muted);
-    }
-    .history-list {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      max-height: 200px;
-      overflow-y: auto;
-    }
-    .history-item {
-      background: rgba(0, 0, 0, 0.3);
-      padding: 8px 12px;
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      border: 1px solid rgba(255, 255, 255, 0.03);
-    }
-    .history-index { font-weight: 800; color: var(--primary-purple); font-size: 0.75rem; }
-    .history-colors { display: flex; gap: 6px; align-items: center; }
-    .color-sq { width: 16px; height: 16px; border-radius: 4px; }
+        .stat-pill {
+            flex: 1;
+            background-color: #10121a;
+            padding: 8px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
 
-    /* Bottom Fixed Footer links (TikTok, Discord, VIP Login) */
-    .footer-bar {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      background: rgba(7, 3, 15, 0.95);
-      border-top: 1px solid var(--card-border);
-      padding: 10px 16px;
-      display: flex;
-      justify-content: center;
-      gap: 12px;
-      z-index: 998;
-      backdrop-filter: blur(8px);
-    }
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background-color: var(--accent-green);
+            border-radius: 50%;
+        }
 
-    .footer-btn {
-      padding: 8px 16px;
-      border-radius: 10px;
-      font-weight: 800;
-      font-size: 0.8rem;
-      text-decoration: none;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      cursor: pointer;
-      border: none;
-    }
-    .btn-vip-login { background: #facc15; color: #000; }
-    .btn-tiktok { background: linear-gradient(135deg, #25f4ee, #fe2c55); color: #fff; }
-    .btn-discord { background: #5865F2; color: #fff; }
+        /* Settings Card */
+        .settings-card {
+            background-color: var(--card-bg);
+            border-radius: var(--border-radius);
+            padding: 15px;
+            border: 2px solid #202538;
+            font-size: 13px;
+            text-align: center;
+        }
 
-    /* Admin Modal */
-    .modal-overlay {
-      position: fixed;
-      top: 0; left: 0; width: 100vw; height: 100vh;
-      background: rgba(0,0,0,0.8);
-      backdrop-filter: blur(6px);
-      z-index: 10000;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      opacity: 0; pointer-events: none;
-      transition: all 0.3s ease;
-    }
-    .modal-overlay.open { opacity: 1; pointer-events: all; }
-    .modal-card {
-      background: var(--bg-dark);
-      border: 2px solid var(--accent-yellow);
-      border-radius: 16px;
-      width: 90%; max-width: 400px;
-      padding: 20px;
-      display: flex; flex-direction: column; gap: 12px;
-      position: relative;
-    }
-    .modal-close { position: absolute; top: 12px; right: 12px; background: none; border: none; color: #fff; font-size: 1.1rem; cursor: pointer; }
-    .modal-title { font-size: 1rem; font-weight: 800; color: var(--accent-yellow); display: flex; align-items: center; gap: 6px; }
-    .input-field {
-      width: 100%;
-      background: rgba(0,0,0,0.5);
-      border: 1px solid var(--card-border);
-      color: #fff; padding: 10px; border-radius: 8px; font-family: inherit; outline: none; font-size: 0.85rem;
-    }
-    .btn-submit {
-      background: var(--accent-yellow); color: #000; border: none; padding: 10px; border-radius: 8px; font-weight: 800; cursor: pointer; font-size: 0.85rem;
-    }
-  </style>
+        .colors-hint {
+            color: var(--text-dim);
+            margin-bottom: 12px;
+        }
+
+        .toggle-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 10px;
+        }
+
+        /* Switch UI */
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 46px;
+            height: 24px;
+        }
+
+        .switch input { opacity: 0; width: 0; height: 0; }
+
+        .slider {
+            position: absolute; cursor: pointer;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-color: #343d5c;
+            transition: .3s;
+            border-radius: 24px;
+        }
+
+        .slider:before {
+            position: absolute; content: "";
+            height: 18px; width: 18px;
+            left: 3px; bottom: 3px;
+            background-color: white;
+            transition: .3s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider { background-color: var(--accent-green); }
+        input:checked + .slider:before { transform: translateX(22px); }
+
+        /* History Logs */
+        .history-card {
+            background-color: var(--card-bg);
+            border-radius: var(--border-radius);
+            padding: 15px;
+            border: 2px solid #202538;
+        }
+
+        .history-title {
+            text-align: center;
+            font-size: 18px;
+            margin-bottom: 12px;
+        }
+
+        .rolls-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            max-height: 180px;
+            overflow-y: auto;
+        }
+
+        .roll-item {
+            background-color: #10121a;
+            padding: 8px 12px;
+            border-radius: 10px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+        }
+
+        /* Modals */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.8);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .modal {
+            background-color: var(--card-bg);
+            border: 2px solid var(--accent-red);
+            border-radius: 20px;
+            width: 90%;
+            max-width: 400px;
+            padding: 20px;
+            box-shadow: 0 0 20px rgba(255,51,102,0.3);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            font-size: 18px;
+            color: var(--accent-red);
+        }
+
+        .modal-close {
+            cursor: pointer;
+            font-size: 20px;
+            color: var(--text-dim);
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 12px;
+            color: var(--text-dim);
+            margin-bottom: 5px;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 10px;
+            background: #10121a;
+            border: 1px solid #323954;
+            border-radius: 10px;
+            color: white;
+            outline: none;
+        }
+
+        .btn-save {
+            width: 100%;
+            padding: 10px;
+            background: var(--accent-red);
+            border: none;
+            color: white;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+    </style>
 </head>
 <body>
 
-  <!-- Broadcast Alert Banner -->
-  <div id="broadcastBanner">
-    <i class="fa-solid fa-bullhorn"></i>
-    <span id="broadcastText">NICE ONE! 🎉</span>
-  </div>
-
-  <!-- Header -->
-  <header class="top-bar">
-    <div class="brand-logo">
-      <i class="fa-solid fa-dice-d6"></i> MY DICE
-    </div>
-    <div class="header-actions">
-      <button class="btn-admin" onclick="openAdminModal()">
-        <i class="fa-solid fa-crown"></i> OWNER PANEL
-      </button>
-    </div>
-  </header>
-
-  <!-- App Layout Grid -->
-  <div class="app-layout">
-    
-    <!-- Left Sidebar: Top VIP Streamers -->
-    <aside class="sidebar-card" id="sidebarContainer">
-      <div class="sidebar-header">
-        <div class="sidebar-title"><i class="fa-solid fa-star"></i> OUR TOP STREAMERS</div>
-        <button class="btn-blur" onclick="toggleBlur()">Blur</button>
-      </div>
-      <div class="streamer-list" id="streamerList"></div>
-    </aside>
-
-    <!-- Center Dice Simulator Card -->
-    <main class="main-card">
-      <div class="controls-row">
-        <div class="control-group">
-          <label class="control-label">DICE COUNT</label>
-          <select class="custom-select" id="diceCount" onchange="updateDiceStage()">
-            <option value="1">1 Dice</option>
-            <option value="2">2 Dice</option>
-            <option value="3">3 Dice</option>
-            <option value="4" selected>4 Dice</option>
-            <option value="5">5 Dice</option>
-          </select>
+    <div class="app-container">
+        <!-- Header -->
+        <div class="header">
+            <button class="btn-owner-panel" onclick="openOwnerPanel()">OWNER PANEL 👑</button>
+            <div class="brand-title">APEX DICE</div>
         </div>
-        <div class="control-group">
-          <label class="control-label">MODE</label>
-          <select class="custom-select">
-            <option value="colored">Colored Only</option>
-          </select>
+
+        <!-- Mode Selectors -->
+        <div class="selectors-grid">
+            <select class="custom-select" id="diceCountSelect" onchange="renderDice()">
+                <option value="4">4 DICE</option>
+                <option value="3">3 DICE</option>
+                <option value="2">2 DICE</option>
+                <option value="1">1 DICE</option>
+            </select>
+            <select class="custom-select">
+                <option>COLOR</option>
+            </select>
+            <select class="custom-select">
+                <option>SAB-BI</option>
+            </select>
         </div>
-      </div>
 
-      <!-- Dice Stage -->
-      <div class="dice-stage" id="diceStage"></div>
-
-      <!-- Session Verification -->
-      <div class="session-bar">
-        <span>SESSION: <strong class="session-id">#DICE99X</strong></span>
-        <a class="verify-link" onclick="alert('Cryptographically Verified & Fair RNG')">Verify</a>
-      </div>
-
-      <!-- Roll Button -->
-      <button class="btn-roll" onclick="rollDice()">
-        <i class="fa-solid fa-dice"></i> ROLL AGAIN !
-      </button>
-
-      <!-- Last 25 Rolls History (Colors Only) -->
-      <div class="history-card">
-        <div class="history-header">
-          <span><i class="fa-solid fa-clock-rotate-left"></i> LAST 25 ROLLS</span>
-          <span style="cursor:pointer;" onclick="clearHistory()">Clear</span>
+        <!-- Dice Box -->
+        <div class="dice-area" id="diceArea">
+            <!-- Dynamic Dice Elements Rendered Here -->
         </div>
-        <div class="history-list" id="historyList"></div>
-      </div>
-    </main>
 
-  </div>
+        <!-- Session ID & Verifier -->
+        <div class="session-info">
+            <div class="game-id">ID: <span id="gameIdDisplay">--------</span></div>
+            <button class="btn-verify" onclick="openVerifyModal()">⏱️ Verify History</button>
+        </div>
 
-  <!-- Bottom Fixed Footer Links -->
-  <footer class="footer-bar">
-    <button class="footer-btn btn-vip-login" onclick="openAdminModal()">VIP LOGIN</button>
-    <a href="https://www.tiktok.com" target="_blank" class="footer-btn btn-tiktok"><i class="fa-brands fa-tiktok"></i> OUR TIKTOK</a>
-    <a href="https://discord.com" target="_blank" class="footer-btn btn-discord"><i class="fa-brands fa-discord"></i> OUR DISCORD</a>
-  </footer>
+        <!-- Roll Action Button -->
+        <button class="btn-roll" id="rollBtn" onclick="triggerRoll()">GO AGAIN !</button>
 
-  <!-- Admin / Owner Modal -->
-  <div class="modal-overlay" id="adminModal">
-    <div class="modal-card">
-      <button class="modal-close" onclick="closeAdminModal()"><i class="fa-solid fa-xmark"></i></button>
-      <div class="modal-title"><i class="fa-solid fa-crown"></i> OWNER BROADCAST</div>
-      
-      <label class="control-label">Announcement Message</label>
-      <input type="text" class="input-field" id="broadcastInput" placeholder="e.g. Good Luck Everyone! 🎉">
-
-      <button class="btn-submit" onclick="sendBroadcast()"><i class="fa-solid fa-paper-plane"></i> Send Alert Banner</button>
-
-      <hr style="border:0; border-top:1px solid var(--card-border); margin:4px 0;">
-
-      <div class="modal-title" style="font-size:0.9rem;"><i class="fa-brands fa-tiktok"></i> Add VIP Streamer</div>
-      <input type="text" class="input-field" id="vipInput" placeholder="TikTok Handle (e.g. @streamer)">
-      <button class="btn-submit" onclick="addStreamer()"><i class="fa-solid fa-plus"></i> Add Streamer</button>
-    </div>
-  </div>
-
-  <script>
-    const colors = ['purple', 'green', 'red', 'yellow', 'blue', 'orange'];
-    let rollHistory = [];
-    let blurred = false;
-
-    let streamers = [
-      { name: "Blinder", handle: "@blinderFps" },
-      { name: "BeanieRot", handle: "@BeanieRot" },
-      { name: "DRAVENOX", handle: "@nofx_zzin0" },
-      { name: "Liam King", handle: "@liamking_1000" },
-      { name: "DarkSon", handle: "@dark_son" }
-    ];
-
-    function updateDiceStage() {
-      const count = parseInt(document.getElementById('diceCount').value);
-      const stage = document.getElementById('diceStage');
-      stage.innerHTML = '';
-      for (let i = 0; i < count; i++) {
-        const c = colors[Math.floor(Math.random() * colors.length)];
-        const cube = document.createElement('div');
-        cube.className = `colored-dice c-${c}`;
-        cube.innerHTML = `<div class="center-dot"></div>`;
-        stage.appendChild(cube);
-      }
-    }
-
-    function rollDice() {
-      const dices = document.querySelectorAll('.colored-dice');
-      dices.forEach(d => d.classList.add('dice-shake'));
-
-      setTimeout(() => {
-        let currentColors = [];
-        dices.forEach(d => {
-          d.classList.remove('dice-shake');
-          const c = colors[Math.floor(Math.random() * colors.length)];
-          d.className = `colored-dice c-${c}`;
-          currentColors.push(c);
-        });
-
-        rollHistory.unshift(currentColors);
-        if (rollHistory.length > 25) rollHistory.pop();
-        renderHistory();
-      }, 400);
-    }
-
-    function renderHistory() {
-      const list = document.getElementById('historyList');
-      list.innerHTML = '';
-      rollHistory.forEach((itemColors, idx) => {
-        const row = document.createElement('div');
-        row.className = 'history-item';
-        const squares = itemColors.map(c => `<div class="color-sq c-${c}"></div>`).join('');
-        row.innerHTML = `
-          <span class="history-index">#${rollHistory.length - idx}</span>
-          <div class="history-colors">${squares}</div>
-        `;
-        list.appendChild(row);
-      });
-    }
-
-    function clearHistory() {
-      rollHistory = [];
-      renderHistory();
-    }
-
-    function renderStreamers() {
-      const list = document.getElementById('streamerList');
-      list.innerHTML = '';
-      streamers.forEach(s => {
-        const item = document.createElement('div');
-        item.className = 'streamer-item';
-        item.onclick = () => window.open(`https://www.tiktok.com/${s.handle}`, '_blank');
-        item.innerHTML = `
-          <div class="streamer-info">
-            <div class="avatar">${s.name[0]}</div>
-            <div class="handle">
-              <span class="handle-name">${s.name} <i class="fa-solid fa-circle-check badge-verified"></i></span>
-              <span class="handle-sub">${s.handle}</span>
+        <!-- Score Board -->
+        <div class="board-card">
+            <div class="score-adjuster">
+                <div>
+                    <button class="score-btn" onclick="updateScore(-1)">-1</button>
+                    <button class="score-btn" onclick="updateScore(-10)" style="margin-left: 4px;">-10</button>
+                </div>
+                <div class="score-value" id="scoreDisplay">0</div>
+                <div>
+                    <button class="score-btn" onclick="updateScore(1)">+1</button>
+                    <button class="score-btn" onclick="updateScore(10)" style="margin-left: 4px;">+10</button>
+                </div>
             </div>
-          </div>
-          <i class="fa-brands fa-tiktok" style="color:var(--text-muted); font-size:0.8rem;"></i>
-        `;
-        list.appendChild(item);
-      });
-    }
 
-    function toggleBlur() {
-      blurred = !blurred;
-      document.getElementById('sidebarContainer').style.filter = blurred ? 'blur(6px)' : 'none';
-    }
+            <div class="stats-bar">
+                <div class="stat-pill">Roll Streak: <span id="streakDisplay">0</span> 🎲</div>
+                <div class="stat-pill">
+                    <span class="status-dot"></span>
+                    Users online: <span id="onlineDisplay">633</span>
+                </div>
+            </div>
+        </div>
 
-    function openAdmin
+        <!-- Color Info & Anti-Ban -->
+        <div class="settings-card">
+            <div class="colors-hint">
+                Possible colors are: <span style="color:#ff3366">Red</span>, <span style="color:#ff9100">Orange</span>, <span style="color:#ffcc00">Yellow</span>, <span style="color:#00e676">Green</span>, <span style="color:#00b0ff">Blue</span> and <span style="color:#9d4edd">Purple</span>.
+            </div>
+            <div class="toggle-row">
+                <span>Anti-Ban Mode</span>
+                <label class="switch">
+                    <input type="checkbox" checked>
+                    <span class="slider"></span>
+                </label>
+            </div>
+        </div>
 
+        <!-- Last Rolls -->
+        <div class="history-card">
+            <div class="history-title">YOUR LAST 20 ROLLS</div>
+            <div class="rolls-list" id="rollsHistory">
+                <!-- Log entries added dynamically -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Owner Modal -->
+    <div class="modal-overlay" id="ownerModal">
+        <div class="modal">
+            <div class="modal-header">
+                <span>OWNER CONTROL 👑</span>
+                <span class="modal-close" onclick="closeOwnerPanel()">&times;</span>
+            </div>
+            <div class="form-group">
+                <label>ONLINE USERS COUNTER</label>
+                <input type="number" id="ownerOnlineInput" class="form-input" value="633">
+            </div>
+            <button class="btn-save" onclick="saveOwnerSettings()">SAVE SETTINGS</button>
+        </div>
+    </div>
+
+    <!-- Verify Modal -->
+    <div class="modal-overlay" id="verifyModal">
+        <div class="modal" style="border-color: var(--accent-blue);">
+            <div class="modal-header" style="color: var(--accent-blue);">
+                <span>VERIFY SESSION LOGS</span>
+                <span class="modal-close" onclick="closeVerifyModal()">&times;</span>
+            </div>
+            <div style="font-size: 12px; color: var(--text-dim); margin-bottom: 12px;">
+                All rolls are cryptographic and verified on system creation.
+            </div>
+            <div class="form-group">
+                <label>CURRENT SESSION ID</label>
+                <input type="text" id="verifyIdInput" class="form-input" readonly>
+            </div>
+            <div class="form-group">
+                <label>SESSION SEED (VERIFIED)</label>
+                <input type="text" id="verifySeedInput" class="form-input" readonly value="Apex-SHA256-Validated">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const colorPalette = [
+            { name: 'Red', class: 'bg-red', icon: '🔴' },
+            { name: 'Orange', class: 'bg-orange', icon: '🟠' },
+            { name: 'Yellow', class: 'bg-yellow', icon: '🟡' },
+            { name: 'Green', class: 'bg-green', icon: '🟢' },
+            { name: 'Blue', class: 'bg-blue', icon: '🔵' },
+            { name: 'Purple', class: 'bg-purple', icon: '🟣' }
+        ];
+
+        let score = 0;
+        let streak = 0;
+        let isRolling = false;
+        let rollLogs = [];
+
+        // App Initialization
+        window.onload = function() {
+            generateNewGameId();
+            loadOwnerSettings();
+            renderDice();
+        };
+
+        function generateGameID() {
+            const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+            let result = '';
+            for (let i = 0; i < 10; i++) {
+                result += chars.charAt(Math.floor(Math.random() * chars.length));
+            }
+            return result;
+        }
+
+        function generateNewGameId() {
+            const newId = generateGameID();
+            document.getElementById('gameIdDisplay').innerText = newId;
+            document.getElementById('verifyIdInput').value = newId;
+        }
+
+        function renderDice() {
+            const count = parseInt(document.getElementById('diceCountSelect').value);
+            const container = document.getElementById('diceArea');
+            container.innerHTML = '';
+
+            for (let i = 0; i < count; i++) {
+                const dice = document.createElement('div');
+                dice.className = 'dice bg-purple';
+                dice.innerText = '⚪';
+                container.appendChild(dice);
+            }
+        }
+
+        function triggerRoll() {
+            if (isRolling) return;
+            isRolling = true;
+
+            const btn = document.getElementById('rollBtn');
+            btn.disabled = true;
+            btn.innerText = 'ROLLING... 🎲';
+
+            generateNewGameId();
+
+            const diceElements = document.querySelectorAll('.dice');
+            diceElements.forEach(d => d.classList.add('rolling'));
+
+            // Simulated Delay (1.2 Seconds)
+            setTimeout(() => {
+                let rolledColors = [];
+
+                diceElements.forEach(d => {
+                    d.classList.remove('rolling');
+                    const randomColor = colorPalette[Math.floor(Math.random() * colorPalette.length)];
+                    d.className = `dice ${randomColor.class}`;
+                    d.innerText = '⚪';
+                    rolledColors.push(randomColor.name);
+                });
+
+                streak++;
+                document.getElementById('streakDisplay').innerText = streak;
+
+                // Log Result
+                addHistoryLog(rolledColors);
+
+                btn.disabled = false;
+                btn.innerText = 'GO AGAIN !';
+                isRolling = false;
+            }, 1200);
+        }
+
+        function updateScore(delta) {
+            score += delta;
+            document.getElementById('scoreDisplay').innerText = score;
+        }
+
+        function addHistoryLog(colors) {
+            const container = document.getElementById('rollsHistory');
+            const logItem = document.createElement('div');
+            logItem.className = 'roll-item';
+            
+            const time = new Date().toLocaleTimeString().split(' ')[0];
+            logItem.innerHTML = `<span>#${rollLogs.length + 1} - ${colors.join(', ')}</span><span style="color:var(--text-dim);">${time}</span>`;
+
+            rollLogs.unshift(logItem);
+            container.prepend(logItem);
+
+            if (container.children.length > 20) {
+                container.removeChild(container.lastChild);
+            }
+        }
+
+        /* Owner Modal Controls */
+        function openOwnerPanel() {
+            document.getElementById('ownerModal').style.display = 'flex';
+        }
+
+        functio
