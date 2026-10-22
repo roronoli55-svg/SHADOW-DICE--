@@ -139,7 +139,6 @@
             gap: 15px;
         }
 
-        /* Top Header */
         .header {
             display: flex;
             justify-content: space-between;
@@ -165,12 +164,6 @@
             box-shadow: 0 4px 0 #80001d;
         }
 
-        .btn-owner-panel:active {
-            transform: translateY(3px);
-            box-shadow: 0 1px 0 #80001d;
-        }
-
-        /* Selectors Grid */
         .selectors-grid {
             display: grid;
             grid-template-columns: 1fr 1fr 1fr;
@@ -189,7 +182,6 @@
             cursor: pointer;
         }
 
-        /* Dice Area */
         .dice-area {
             background-color: var(--card-bg);
             border-radius: var(--border-radius);
@@ -226,7 +218,6 @@
             100% { transform: rotate(360deg) scale(0.95); }
         }
 
-        /* Dice Colors */
         .bg-purple { background-color: var(--accent-purple); }
         .bg-yellow { background-color: var(--accent-yellow); color: #000; }
         .bg-red { background-color: var(--accent-red); }
@@ -234,7 +225,6 @@
         .bg-orange { background-color: #ff9100; }
         .bg-green { background-color: var(--accent-green); color: #000; }
 
-        /* Game ID and Verification */
         .session-info {
             display: flex;
             flex-direction: column;
@@ -261,7 +251,6 @@
             cursor: pointer;
         }
 
-        /* Roll Button */
         .btn-roll {
             background: linear-gradient(180deg, #ffd000 0%, #ff9100 100%);
             border: none;
@@ -286,7 +275,6 @@
             cursor: not-allowed;
         }
 
-        /* Board Card */
         .board-card {
             background-color: var(--card-bg);
             border-radius: var(--border-radius);
@@ -343,7 +331,6 @@
             border-radius: 50%;
         }
 
-        /* History Card */
         .history-card {
             background-color: var(--card-bg);
             border-radius: var(--border-radius);
@@ -374,7 +361,6 @@
             font-size: 12px;
         }
 
-        /* Modals */
         .modal-overlay {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -501,146 +487,5 @@
                 <div class="score-adjuster">
                     <div>
                         <button class="score-btn" onclick="updateScore(-1)">-1</button>
-                        <button class="score-btn" onclick="updateScore(-10)">-10</button>
-                    </div>
-                    <div class="score-value" id="scoreDisplay">0</div>
-                    <div>
-                        <button class="score-btn" onclick="updateScore(1)">+1</button>
-                        <button class="score-btn" onclick="updateScore(10)">+10</button>
-                    </div>
-                </div>
-
-                <div class="stats-bar">
-                    <div class="stat-pill">Streak: <span id="streakDisplay">0</span> 🎲</div>
-                    <div class="stat-pill">
-                        <span class="status-dot"></span>
-                        Online: <span id="onlineDisplay">633</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="history-card">
-                <div class="history-title">YOUR LAST 20 ROLLS</div>
-                <div class="rolls-list" id="rollsHistory"></div>
-            </div>
-        </div>
-
-        <!-- Right Streamers Sidebar -->
-        <div class="streamers-sidebar">
-            <div class="sidebar-title">TOP STREAMERS</div>
-            <a href="https://tiktok.com" target="_blank" class="streamer-card">
-                <div class="avatar">L</div>
-                <div class="streamer-info">
-                    <span class="streamer-name">LIAM TRADES</span>
-                    <span class="streamer-handle">@liamtrades</span>
-                </div>
-            </a>
-            <a href="https://tiktok.com" target="_blank" class="streamer-card">
-                <div class="avatar">D</div>
-                <div class="streamer-info">
-                    <span class="streamer-name">DRAVENOX</span>
-                    <span class="streamer-handle">@dravenox</span>
-                </div>
-            </a>
-        </div>
-    </div>
-
-    <!-- Owner Modal -->
-    <div class="modal-overlay" id="ownerModal">
-        <div class="modal">
-            <div class="modal-header">
-                <span>OWNER CONTROL 👑</span>
-                <span class="modal-close" onclick="closeOwnerPanel()">&times;</span>
-            </div>
-            <div class="form-group">
-                <label>ONLINE USERS COUNTER</label>
-                <input type="number" id="ownerOnlineInput" class="form-input" value="633">
-            </div>
-            <button class="btn-save" onclick="saveOwnerSettings()">SAVE SETTINGS</button>
-        </div>
-    </div>
-
-    <!-- Verify Modal -->
-    <div class="modal-overlay" id="verifyModal">
-        <div class="modal" style="border-color: var(--accent-blue);">
-            <div class="modal-header" style="color: var(--accent-blue);">
-                <span>VERIFY SESSION LOGS</span>
-                <span class="modal-close" onclick="closeVerifyModal()">&times;</span>
-            </div>
-            <div class="form-group">
-                <label>CURRENT SESSION ID</label>
-                <input type="text" id="verifyIdInput" class="form-input" readonly>
-            </div>
-            <div class="form-group">
-                <label>SEED (VERIFIED)</label>
-                <input type="text" class="form-input" readonly value="Apex-SHA256-Validated">
-            </div>
-        </div>
-    </div>
-
-    <script>
-        const colorPalette = [
-            { name: 'Red', class: 'bg-red' },
-            { name: 'Orange', class: 'bg-orange' },
-            { name: 'Yellow', class: 'bg-yellow' },
-            { name: 'Green', class: 'bg-green' },
-            { name: 'Blue', class: 'bg-blue' },
-            { name: 'Purple', class: 'bg-purple' }
-        ];
-
-        let score = 0;
-        let streak = 0;
-        let isRolling = false;
-
-        window.onload = function() {
-            generateNewGameId();
-            renderDice();
-        };
-
-        function generateNewGameId() {
-            const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-            let res = '';
-            for (let i = 0; i < 10; i++) res += chars.charAt(Math.floor(Math.random() * chars.length));
-            document.getElementById('gameIdDisplay').innerText = res;
-            document.getElementById('verifyIdInput').value = res;
-        }
-
-        function renderDice() {
-            const count = parseInt(document.getElementById('diceCountSelect').value);
-            const container = document.getElementById('diceArea');
-            container.innerHTML = '';
-            for (let i = 0; i < count; i++) {
-                const dice = document.createElement('div');
-                dice.className = 'dice bg-purple';
-                dice.innerText = '⚪';
-                container.appendChild(dice);
-            }
-        }
-
-        function triggerRoll() {
-            if (isRolling) return;
-            isRolling = true;
-            const btn = document.getElementById('rollBtn');
-            btn.disabled = true;
-            btn.innerText = 'ROLLING... 🎲';
-
-            generateNewGameId();
-            const diceElements = document.querySelectorAll('.dice');
-            diceElements.forEach(d => d.classList.add('rolling'));
-
-            setTimeout(() => {
-                let rolledColors = [];
-                diceElements.forEach(d => {
-                    d.classList.remove('rolling');
-                    const rand = colorPalette[Math.floor(Math.random() * colorPalette.length)];
-                    d.className = `dice ${rand.class}`;
-                    d.innerText = '⚪';
-                    rolledColors.push(rand.name);
-                });
-
-                streak++;
-                document.getElementById('streakDisplay').innerText = streak;
-                addHistoryLog(rolledColors);
-
-                btn.disabled = false;
-                btn.innerText = 'GO AGAI
+                        <button
+                            
