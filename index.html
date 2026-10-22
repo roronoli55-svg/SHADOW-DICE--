@@ -34,33 +34,34 @@
             justify-content: center;
             align-items: flex-start;
             min-height: 100vh;
-            padding: 20px 10px;
+            padding: 15px 10px;
         }
 
         .main-wrapper {
             display: flex;
-            gap: 20px;
+            gap: 15px;
             width: 100%;
             max-width: 1200px;
             justify-content: center;
+            align-items: flex-start;
         }
 
         /* Sidebars for Streamers */
         .streamers-sidebar {
-            width: 240px;
+            width: 220px;
             background: var(--card-bg);
             border-radius: var(--border-radius);
-            padding: 15px;
+            padding: 12px;
             border: 2px solid #202538;
             display: flex;
             flex-direction: column;
-            gap: 12px;
-            height: fit-content;
+            gap: 10px;
+            flex-shrink: 0;
         }
 
         .sidebar-title {
             font-family: 'Luckiest Guy', cursive;
-            font-size: 16px;
+            font-size: 14px;
             text-align: center;
             color: var(--accent-yellow);
             letter-spacing: 1px;
@@ -69,11 +70,11 @@
         .streamer-card {
             background: #0d0f17;
             border: 1px solid #252b3e;
-            padding: 10px;
-            border-radius: 14px;
+            padding: 8px 10px;
+            border-radius: 12px;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
             cursor: pointer;
             text-decoration: none;
             color: white;
@@ -87,18 +88,18 @@
 
         .streamer-card.live {
             border-color: var(--accent-red);
-            box-shadow: 0 0 10px rgba(255, 51, 102, 0.3);
+            box-shadow: 0 0 8px rgba(255, 51, 102, 0.3);
         }
 
         .avatar {
-            width: 40px;
-            height: 40px;
+            width: 34px;
+            height: 34px;
             border-radius: 50%;
             background: #252b3e;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 18px;
+            font-size: 15px;
             font-weight: bold;
         }
 
@@ -110,33 +111,34 @@
         }
 
         .streamer-name {
-            font-size: 13px;
+            font-size: 12px;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
         }
 
         .streamer-handle {
-            font-size: 11px;
+            font-size: 10px;
             color: var(--text-dim);
         }
 
         .live-badge {
             background: var(--accent-red);
             color: white;
-            font-size: 9px;
-            padding: 2px 6px;
-            border-radius: 8px;
+            font-size: 8px;
+            padding: 2px 5px;
+            border-radius: 6px;
             font-weight: bold;
         }
 
         /* Center App Container */
         .app-container {
             width: 100%;
-            max-width: 480px;
+            max-width: 460px;
             display: flex;
             flex-direction: column;
-            gap: 15px;
+            gap: 12px;
+            flex-shrink: 0;
         }
 
         .header {
@@ -147,7 +149,7 @@
 
         .brand-title {
             font-family: 'Luckiest Guy', cursive;
-            font-size: 26px;
+            font-size: 24px;
             letter-spacing: 1.5px;
             color: var(--text-white);
             text-shadow: 2px 2px 0px #000;
@@ -157,9 +159,9 @@
             background: linear-gradient(180deg, #ff3366 0%, #d80032 100%);
             border: 2px solid #ff7597;
             color: white;
-            padding: 8px 16px;
+            padding: 6px 14px;
             border-radius: 12px;
-            font-size: 14px;
+            font-size: 13px;
             cursor: pointer;
             box-shadow: 0 4px 0 #80001d;
         }
@@ -174,9 +176,9 @@
             background-color: #202538;
             border: 2px solid #323954;
             color: white;
-            padding: 10px 8px;
-            border-radius: 14px;
-            font-size: 14px;
+            padding: 8px;
+            border-radius: 12px;
+            font-size: 13px;
             text-align: center;
             outline: none;
             cursor: pointer;
@@ -185,25 +187,25 @@
         .dice-area {
             background-color: var(--card-bg);
             border-radius: var(--border-radius);
-            padding: 25px 15px;
+            padding: 20px 10px;
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 12px;
-            min-height: 120px;
+            gap: 10px;
+            min-height: 110px;
             border: 2px solid #202538;
             box-shadow: inset 0 0 15px rgba(0,0,0,0.5);
         }
 
         .dice {
-            width: 70px;
-            height: 70px;
-            border-radius: 18px;
+            width: 60px;
+            height: 60px;
+            border-radius: 16px;
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 32px;
-            box-shadow: 0 6px 0 rgba(0,0,0,0.4);
+            font-size: 28px;
+            box-shadow: 0 5px 0 rgba(0,0,0,0.4);
             border: 3px solid rgba(255,255,255,0.2);
             transition: transform 0.15s, background-color 0.2s;
         }
@@ -229,11 +231,11 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 6px;
+            gap: 4px;
         }
 
         .game-id {
-            font-size: 18px;
+            font-size: 16px;
             letter-spacing: 1px;
         }
 
@@ -245,9 +247,9 @@
             background-color: #202538;
             border: 2px solid #343d5c;
             color: #4da6ff;
-            padding: 6px 14px;
+            padding: 5px 12px;
             border-radius: 20px;
-            font-size: 13px;
+            font-size: 12px;
             cursor: pointer;
         }
 
@@ -256,18 +258,18 @@
             border: none;
             color: #000;
             font-family: 'Luckiest Guy', cursive;
-            font-size: 30px;
-            padding: 16px;
-            border-radius: 20px;
+            font-size: 26px;
+            padding: 14px;
+            border-radius: 18px;
             cursor: pointer;
-            box-shadow: 0 8px 0 #b36b00;
+            box-shadow: 0 6px 0 #b36b00;
             letter-spacing: 1px;
             width: 100%;
         }
 
         .btn-roll:active {
-            transform: translateY(6px);
-            box-shadow: 0 2px 0 #b36b00;
+            transform: translateY(5px);
+            box-shadow: 0 1px 0 #b36b00;
         }
 
         .btn-roll:disabled {
@@ -278,7 +280,7 @@
         .board-card {
             background-color: var(--card-bg);
             border-radius: var(--border-radius);
-            padding: 15px;
+            padding: 12px;
             border: 2px solid #202538;
         }
 
@@ -287,46 +289,47 @@
             justify-content: space-between;
             align-items: center;
             background-color: #0d0f17;
-            padding: 10px 15px;
-            border-radius: 14px;
-            margin-bottom: 12px;
+            padding: 8px 12px;
+            border-radius: 12px;
+            margin-bottom: 10px;
         }
 
         .score-btn {
             background-color: #252b3e;
             border: 1px solid #3a4361;
             color: white;
-            padding: 6px 12px;
+            padding: 5px 10px;
             border-radius: 8px;
             cursor: pointer;
+            font-size: 12px;
         }
 
         .score-value {
-            font-size: 36px;
+            font-size: 32px;
             font-weight: bold;
         }
 
         .stats-bar {
             display: flex;
             justify-content: space-between;
-            gap: 10px;
+            gap: 8px;
         }
 
         .stat-pill {
             flex: 1;
             background-color: #0d0f17;
-            padding: 8px 12px;
-            border-radius: 12px;
-            font-size: 12px;
+            padding: 6px 10px;
+            border-radius: 10px;
+            font-size: 11px;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 6px;
+            gap: 5px;
         }
 
         .status-dot {
-            width: 8px;
-            height: 8px;
+            width: 7px;
+            height: 7px;
             background-color: var(--accent-green);
             border-radius: 50%;
         }
@@ -334,31 +337,31 @@
         .history-card {
             background-color: var(--card-bg);
             border-radius: var(--border-radius);
-            padding: 15px;
+            padding: 12px;
             border: 2px solid #202538;
         }
 
         .history-title {
             text-align: center;
-            font-size: 18px;
-            margin-bottom: 12px;
+            font-size: 16px;
+            margin-bottom: 10px;
         }
 
         .rolls-list {
             display: flex;
             flex-direction: column;
-            gap: 8px;
-            max-height: 180px;
+            gap: 6px;
+            max-height: 150px;
             overflow-y: auto;
         }
 
         .roll-item {
             background-color: #0d0f17;
-            padding: 8px 12px;
-            border-radius: 10px;
+            padding: 6px 10px;
+            border-radius: 8px;
             display: flex;
             justify-content: space-between;
-            font-size: 12px;
+            font-size: 11px;
         }
 
         .modal-overlay {
@@ -376,59 +379,77 @@
             border: 2px solid var(--accent-red);
             border-radius: 20px;
             width: 90%;
-            max-width: 400px;
-            padding: 20px;
+            max-width: 380px;
+            padding: 18px;
         }
 
         .modal-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 15px;
-            font-size: 18px;
+            margin-bottom: 12px;
+            font-size: 16px;
             color: var(--accent-red);
         }
 
         .modal-close {
             cursor: pointer;
-            font-size: 20px;
+            font-size: 18px;
             color: var(--text-dim);
         }
 
         .form-group {
-            margin-bottom: 15px;
+            margin-bottom: 12px;
         }
 
         .form-group label {
             display: block;
-            font-size: 12px;
+            font-size: 11px;
             color: var(--text-dim);
-            margin-bottom: 5px;
+            margin-bottom: 4px;
         }
 
         .form-input {
             width: 100%;
-            padding: 10px;
+            padding: 8px;
             background: #0d0f17;
             border: 1px solid #323954;
-            border-radius: 10px;
+            border-radius: 8px;
             color: white;
             outline: none;
+            font-size: 13px;
         }
 
         .btn-save {
             width: 100%;
-            padding: 10px;
+            padding: 9px;
             background: var(--accent-red);
             border: none;
             color: white;
-            border-radius: 10px;
+            border-radius: 8px;
             cursor: pointer;
+            font-size: 13px;
         }
 
-        @media (max-width: 900px) {
+        /* تحسين التجاوب مع الجوال والشاشات الصغيرة */
+        @media (max-width: 950px) {
+            .main-wrapper {
+                flex-direction: column;
+                align-items: center;
+            }
             .streamers-sidebar {
-                display: none;
+                width: 100%;
+                max-width: 460px;
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: space-around;
+            }
+            .streamer-card {
+                flex: 1;
+                min-width: 190px;
+            }
+            .sidebar-title {
+                width: 100%;
             }
         }
     </style>
@@ -438,7 +459,7 @@
     <div class="main-wrapper">
         <!-- Left Streamers Sidebar -->
         <div class="streamers-sidebar">
-            <div class="sidebar-title">OUR TOP STREAMERS</div>
+            <div class="sidebar-title">TOP STREAMERS</div>
             <a href="https://tiktok.com" target="_blank" class="streamer-card live">
                 <div class="avatar">M</div>
                 <div class="streamer-info">
@@ -487,5 +508,138 @@
                 <div class="score-adjuster">
                     <div>
                         <button class="score-btn" onclick="updateScore(-1)">-1</button>
-                        <button
-                            
+                        <button class="score-btn" onclick="updateScore(-10)">-10</button>
+                    </div>
+                    <div class="score-value" id="scoreDisplay">0</div>
+                    <div>
+                        <button class="score-btn" onclick="updateScore(1)">+1</button>
+                        <button class="score-btn" onclick="updateScore(10)">+10</button>
+                    </div>
+                </div>
+
+                <div class="stats-bar">
+                    <div class="stat-pill">Streak: <span id="streakDisplay">0</span> 🎲</div>
+                    <div class="stat-pill">
+                        <span class="status-dot"></span>
+                        Online: <span id="onlineDisplay">633</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="history-card">
+                <div class="history-title">YOUR LAST 20 ROLLS</div>
+                <div class="rolls-list" id="rollsHistory"></div>
+            </div>
+        </div>
+
+        <!-- Right Streamers Sidebar -->
+        <div class="streamers-sidebar">
+            <div class="sidebar-title">TOP STREAMERS</div>
+            <a href="https://tiktok.com" target="_blank" class="streamer-card">
+                <div class="avatar">L</div>
+                <div class="streamer-info">
+                    <span class="streamer-name">LIAM TRADES</span>
+                    <span class="streamer-handle">@liamtrades</span>
+                </div>
+            </a>
+            <a href="https://tiktok.com" target="_blank" class="streamer-card">
+                <div class="avatar">D</div>
+                <div class="streamer-info">
+                    <span class="streamer-name">DRAVENOX</span>
+                    <span class="streamer-handle">@dravenox</span>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <!-- Owner Modal -->
+    <div class="modal-overlay" id="ownerModal">
+        <div class="modal">
+            <div class="modal-header">
+                <span>OWNER CONTROL 👑</span>
+                <span class="modal-close" onclick="closeOwnerPanel()">&times;</span>
+            </div>
+            <div class="form-group">
+                <label>ONLINE USERS COUNTER</label>
+                <input type="number" id="ownerOnlineInput" class="form-input" value="633">
+            </div>
+            <button class="btn-save" onclick="saveOwnerSettings()">SAVE SETTINGS</button>
+        </div>
+    </div>
+
+    <!-- Verify Modal -->
+    <div class="modal-overlay" id="verifyModal">
+        <div class="modal" style="border-color: var(--accent-blue);">
+            <div class="modal-header" style="color: var(--accent-blue);">
+                <span>VERIFY SESSION LOGS</span>
+                <span class="modal-close" onclick="closeVerifyModal()">&times;</span>
+            </div>
+            <div class="form-group">
+                <label>CURRENT SESSION ID</label>
+                <input type="text" id="verifyIdInput" class="form-input" readonly>
+            </div>
+            <div class="form-group">
+                <label>SEED (VERIFIED)</label>
+                <input type="text" class="form-input" readonly value="Apex-SHA256-Validated">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const colorPalette = [
+            { name: 'Red', class: 'bg-red' },
+            { name: 'Orange', class: 'bg-orange' },
+            { name: 'Yellow', class: 'bg-yellow' },
+            { name: 'Green', class: 'bg-green' },
+            { name: 'Blue', class: 'bg-blue' },
+            { name: 'Purple', class: 'bg-purple' }
+        ];
+
+        let score = 0;
+        let streak = 0;
+        let isRolling = false;
+
+        window.onload = function() {
+            generateNewGameId();
+            renderDice();
+        };
+
+        function generateNewGameId() {
+            const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+            let res = '';
+            for (let i = 0; i < 10; i++) res += chars.charAt(Math.floor(Math.random() * chars.length));
+            document.getElementById('gameIdDisplay').innerText = res;
+            document.getElementById('verifyIdInput').value = res;
+        }
+
+        function renderDice() {
+            const count = parseInt(document.getElementById('diceCountSelect').value);
+            const container = document.getElementById('diceArea');
+            container.innerHTML = '';
+            for (let i = 0; i < count; i++) {
+                const dice = document.createElement('div');
+                dice.className = 'dice bg-purple';
+                dice.innerText = '⚪';
+                container.appendChild(dice);
+            }
+        }
+
+        function triggerRoll() {
+            if (isRolling) return;
+            isRolling = true;
+            const btn = document.getElementById('rollBtn');
+            btn.disabled = true;
+            btn.innerText = 'ROLLING... 🎲';
+
+            generateNewGameId();
+            const diceElements = document.querySelectorAll('.dice');
+            diceElements.forEach(d => d.classList.add('rolling'));
+
+            setTimeout(() => {
+                let rolledColors = [];
+                diceElements.forEach(d => {
+                    d.classList.remove('rolling');
+                    const rand = colorPalette[Math.floor(Math.random() * colorPalette.length)];
+                    d.className = `dice ${rand.class}`;
+                    d.innerText = '⚪';
+                    rolledColors.pus
